@@ -1,3 +1,12 @@
 CREATE DATABASE IF NOT EXISTS spy CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 USE spy;
+
+CREATE TABLE IF NOT EXISTS admin (
+	id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    last_name VARCHAR(60) NOT NULL,
+    first_name VARCHAR(60) NOT NULL,
+    email CHAR(100) NOT NULL UNIQUE,
+    password CHAR(255) NOT NULL,
+    creation_date DATE NOT NULL
+) ENGINE=InnoDB;
