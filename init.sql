@@ -53,3 +53,18 @@ CREATE TABLE IF NOT EXISTS mission_type (
 	id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
     type VARCHAR(60) NOT NULL
 ) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS mission (
+	id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    title VARCHAR(60) NOT NULL,
+    description TINYTEXT NOT NULL,
+    code_name VARCHAR(60),
+    start_date DATETIME NOT NULL,
+    end_date DATETIME NOT NULL,
+    skill_id INT(11) NOT NULL,
+    mission_type_id INT(11) NOT NULL,
+    mission_status_id INT(11) NOT NULL,
+    CONSTRAINT FK_skill_id_mission FOREIGN KEY (skill_id) REFERENCES skill(id),
+    CONSTRAINT FK_mission_type_id FOREIGN KEY (mission_type_id) REFERENCES mission_type(id),
+    CONSTRAINT FK_mission_status_id FOREIGN KEY (mission_status_id) REFERENCES mission_status(id)
+) ENGINE=InnoDB;
