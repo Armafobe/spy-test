@@ -88,3 +88,13 @@ CREATE TABLE IF NOT EXISTS target (
 	CONSTRAINT FK_nationality_id_target FOREIGN KEY (nationality_id) REFERENCES nationality(id),
 	CONSTRAINT FK_mission_id_target FOREIGN KEY (mission_id) REFERENCES mission(id)
 ) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS contact (
+	id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	last_name VARCHAR(60) NOT NULL,
+	first_name VARCHAR(60) NOT NULL,
+	birth_date DATE NOT NULL,
+	code_name VARCHAR(60) NOT NULL,
+	nationality_id INT(11) NOT NULL,
+	CONSTRAINT FK_nationality_id_contact FOREIGN KEY (nationality_id) REFERENCES nationality(id)
+) ENGINE=InnoDB;
