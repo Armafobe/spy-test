@@ -98,3 +98,22 @@ CREATE TABLE IF NOT EXISTS contact (
 	nationality_id INT(11) NOT NULL,
 	CONSTRAINT FK_nationality_id_contact FOREIGN KEY (nationality_id) REFERENCES nationality(id)
 ) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS mission_contact (
+	mission_id INT(11) NOT NULL,
+	contact_id INT(11) NOT NULL,
+	PRIMARY KEY (mission_id, contact_id),
+	CONSTRAINT FK_mission_id_contact FOREIGN KEY (mission_id) REFERENCES mission(id),
+	CONSTRAINT FK_contact_id FOREIGN KEY (contact_id) REFERENCES contact(id)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS hideout (
+	id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    code CHAR(60) NOT NULL,
+    address VARCHAR(100) NOT NULL,
+    type VARCHAR(100) NOT NULL,
+    country_id INT(11) NOT NULL,
+    mission_id INT(11) NOT NULL,
+    CONSTRAINT FK_country_id FOREIGN KEY (country_id) REFERENCES country(id),
+    CONSTRAINT FK_mission_id_hideout FOREIGN KEY (mission_id) REFERENCES mission(id)
+) ENGINE=InnoDB;
