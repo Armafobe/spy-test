@@ -136,3 +136,15 @@ INSERT INTO hideout (code, address, type, country_id, mission_id) VALUES
 ('Monolith Haven', '56 Walton Center', 'Opera Lodge', '14', '9'),
 ('Sisterhood Cave', '3008 Anniversary Alley', 'Yacht', '8', '1'),
 ('Lightwork Hideaway', '2451 Golf Course Junction', 'Retirement Home', '4', '5');
+
+INSERT INTO mission_contact (mission_id, contact_id) VALUES
+(1, 8),
+(2, 6),
+(3, 10),
+(4, 15),
+(5, 4),
+(6, 2),
+(7, 1),
+(8, 3),
+(9, 14),
+(10, 9);
