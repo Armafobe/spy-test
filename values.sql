@@ -148,3 +148,15 @@ INSERT INTO mission_contact (mission_id, contact_id) VALUES
 (8, 3),
 (9, 14),
 (10, 9);
+
+INSERT INTO target (last_name, first_name, birth_date, code_name, nationality_id, mission_id) VALUES
+('Kilius', 'Doyle', '1989-03-01', 'Alopex Lagopus', 8, 1),
+('Harbison', 'Misha', '1959-04-18', 'Acanthaster planci', 13, 2),
+('Domeny', 'Olympie', '1986-01-14', 'Macaca nemestrina', 10, 3),
+('Purves', 'Lilith', '1953-04-23', 'Pterocles gutturalis', 15, 4),
+('Rumming', 'Letisha', '1980-05-06', 'Platalea leucordia', 3, 5),
+('Reaveley', 'Fredericka', '1965-03-21', 'Tayassu pecari', 5, 6),
+('Milmo', 'Daile', '1954-07-01', 'Ratufa indica', 12, 7),
+('Winspurr', 'Conrado', '1970-12-18', 'Pteronura brasiliensis', 3, 8),
+('Bazley', 'Hannah', '1960-12-02', 'Geochelone radiata', 4, 9),
+('Farress', 'Marj', '1967-01-24', 'Trichoglossus chlorolepidotus', 11, 10);
