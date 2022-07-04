@@ -89,3 +89,15 @@ INSERT INTO mission_type (type) VALUES
 ('Kidnapping'),
 ('Extortion'),
 ('Intimidation');
+
+INSERT INTO mission (title, description, code_name, start_date, end_date, skill_id, mission_type_id, mission_status_id) VALUES 
+('Return of the Scorpions', 'Have the heir of the French family Belmont tell us ', 'Gold Lime Lion', '2022-07-01 09:00', '2022-08-01 00:00', 2, 5, 2),
+('Darkest Hope', '', 'Platinum Purple Cat', '2022-08-28 11:30:00', '2022-09-03 16:45:00', 1, 3, 1),
+('Brilliant King', '', 'Copper Blue Alligator', '2022-04-05 06:00', '2022-04-25 06:00', 8, 1, 3),
+('Rain of the Lion', '', 'Aluminium Red Chicken', '2022-06-12 19:45', '2022-09-12 23:00', 9, 7, 2),
+('Last Roar', '', 'Titanium Green Leopard', '2022-09-30 01:00', '2022-11-15 15:45', 3, 2, 2),
+('Ladies Glory', '', 'Steel Turquoise Dog', '2022-12-25 00:00', '2022-12-26 00:00', 5, 7, 1),
+('Sleeping Eagle', '', 'Lead Silver Shark', '2022-03-01 00:00', '2022-03-02 14:00', 7, 6, 4),
+('Acid Rain', '', 'Diamond Pink Dolphin', '2022-05-30 15:45', '2022-08-31 17:15', 4, 8, 2),
+('Nightfall', '', 'Bronze Aqua Iguana', '2022-02-06 06:30', '2022-02-20 19:00', 10, 5, 4),
+('Sky Guardian', '', 'Brass Orange Cow', '2022-05-07 10:45', '2022-06-07 17:00', 6, 4, 3);
