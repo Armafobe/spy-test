@@ -90,7 +90,7 @@ INSERT INTO mission_type (type) VALUES
 ('Extortion'),
 ('Intimidation');
 
-INSERT INTO mission (title, description, code_name, start_date, end_date, skill_id, mission_type_id, mission_status_id) VALUES 
+INSERT INTO mission (title, description, code_name, country, start_date, end_date, skill_id, mission_type_id, mission_status_id) VALUES 
 ('Return of the Scorpions', 'Have the heir of the French family Belmont whether he\'s a member of the Necrofire Cult.', 'Gold Lime Lion', '2022-07-01 09:00', '2022-08-01 00:00', 2, 5, 2),
 ('Darkest Hope', 'Retrieve the target\'s offshore bank account and transfer the money on Saint-Joseph orphanage.', 'Platinum Purple Cat', '2022-08-28 11:30:00', '2022-09-03 16:45:00', 1, 3, 1),
 ('Brilliant King', 'Find and kill the leader of the Chinese mafia.', 'Copper Blue Alligator', '2022-04-05 06:00', '2022-04-25 06:00', 8, 1, 3),
