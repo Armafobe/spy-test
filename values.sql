@@ -94,7 +94,7 @@ INSERT INTO mission (title, description, code_name, country, start_date, end_dat
 ('Return of the Scorpions', 'Have the heir of the French family Belmont whether he\'s a member of the Necrofire Cult.', 'Gold Lime Lion', 'Morocco', '2022-07-01 09:00', '2022-08-01 00:00', 2, 5, 2),
 ('Darkest Hope', 'Retrieve the target\'s offshore bank account and transfer the money on Saint-Joseph orphanage.', 'Platinum Purple Cat', 'Haiti', '2022-08-28 11:30:00', '2022-09-03 16:45:00', 1, 3, 1),
 ('Brilliant King', 'Find and kill the leader of the Chinese mafia.', 'Copper Blue Alligator', 'China', '2022-04-05 06:00', '2022-04-25 06:00', 8, 1, 3),
-('Rain of the Lion', '', 'Aluminium Red Chicken', 'Finland', '2022-06-12 19:45', '2022-09-12 23:00', 9, 7, 2),
+('Rain of the Lion', 'Make a copy of the queen\'s jewels, rob the original ones and replace them with the copy.', 'Aluminium Red Chicken', 'Finland', '2022-06-12 19:45', '2022-09-12 23:00', 9, 7, 2),
 ('Last Roar', '', 'Titanium Green Leopard', 'Brazil', '2022-09-30 01:00', '2022-11-15 15:45', 3, 2, 2),
 ('Ladies Glory', '', 'Steel Turquoise Dog', 'Poland', '2022-12-25 00:00', '2022-12-26 00:00', 5, 7, 1),
 ('Sleeping Eagle', '', 'Lead Silver Shark', 'Indonesia', '2022-03-01 00:00', '2022-03-02 14:00', 7, 6, 4),
