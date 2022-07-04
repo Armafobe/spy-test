@@ -113,3 +113,18 @@ INSERT INTO agent_skill (agent_id, skill_id) VALUES
 (4, 3),
 (4, 6),
 (5, 9);
+
+INSERT INTO mission_agent (mission_id, agent_id) VALUES
+(1, 3),
+(2, 2),
+(3, 1),
+(4, 4),
+(4, 5),
+(5, 2),
+(5, 4),
+(6, 3),
+(7, 1),
+(8, 2),
+(9, 3),
+(10, 3),
+(10, 4);
