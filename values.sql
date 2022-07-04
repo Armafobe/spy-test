@@ -101,3 +101,15 @@ INSERT INTO mission (title, description, code_name, start_date, end_date, skill_
 ('Acid Rain', '', 'Diamond Pink Dolphin', '2022-05-30 15:45', '2022-08-31 17:15', 4, 8, 2),
 ('Nightfall', '', 'Bronze Aqua Iguana', '2022-02-06 06:30', '2022-02-20 19:00', 10, 5, 4),
 ('Sky Guardian', '', 'Brass Orange Cow', '2022-05-07 10:45', '2022-06-07 17:00', 6, 4, 3);
+
+INSERT INTO agent_skill (agent_id, skill_id) VALUES 
+(1, 7),
+(1, 8),
+(2, 1),
+(2, 4),
+(3, 2),
+(3, 5),
+(3, 10),
+(4, 3),
+(4, 6),
+(5, 9);
