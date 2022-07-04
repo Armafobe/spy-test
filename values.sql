@@ -128,3 +128,11 @@ INSERT INTO mission_agent (mission_id, agent_id) VALUES
 (9, 3),
 (10, 3),
 (10, 4);
+
+INSERT INTO hideout (code, address, type, country_id, mission_id) VALUES
+('Shadow Cover', '4889 Bunker Hill Hill', 'Basement', '9', '10'),
+('Deepmantle Harbor', '50994 Messerschmidt Point', 'Barber Shop', '2', '6'),
+('Nightshield Escape', '2794 Fulton Circle', 'Attic', '3', '8'),
+('Monolith Haven', '56 Walton Center', 'Opera Lodge', '14', '9'),
+('Sisterhood Cave', '3008 Anniversary Alley', 'Yacht', '8', '1'),
+('Lightwork Hideaway', '2451 Golf Course Junction', 'Retirement Home', '4', '5');
