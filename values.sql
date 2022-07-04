@@ -77,7 +77,8 @@ INSERT INTO skill (name) VALUES
 INSERT INTO mission_status (status) VALUES
 ('To be started'),
 ('Ongoing'),
-('Completed');
+('Completed'),
+('Failure');
 
 INSERT INTO mission_type (type) VALUES
 ('Assassination'),
