@@ -95,12 +95,12 @@ INSERT INTO mission (title, description, code_name, country, start_date, end_dat
 ('Darkest Hope', 'Retrieve the target\'s offshore bank account and transfer the money on Saint-Joseph orphanage.', 'Platinum Purple Cat', 'Haiti', '2022-08-28 11:30:00', '2022-09-03 16:45:00', 1, 3, 1),
 ('Brilliant King', 'Find and kill the leader of the Chinese mafia.', 'Copper Blue Alligator', 'China', '2022-04-05 06:00', '2022-04-25 06:00', 8, 1, 3),
 ('Rain of the Lion', 'Make a copy of the queen\'s jewels, rob the original ones and replace them with the copy.', 'Aluminium Red Chicken', 'Finland', '2022-06-12 19:45', '2022-09-12 23:00', 9, 7, 2),
-('Last Roar', '', 'Titanium Green Leopard', 'Brazil', '2022-09-30 01:00', '2022-11-15 15:45', 3, 2, 2),
-('Ladies Glory', '', 'Steel Turquoise Dog', 'Poland', '2022-12-25 00:00', '2022-12-26 00:00', 5, 7, 1),
-('Sleeping Eagle', '', 'Lead Silver Shark', 'Indonesia', '2022-03-01 00:00', '2022-03-02 14:00', 7, 6, 4),
-('Acid Rain', '', 'Diamond Pink Dolphin', 'Thailand', '2022-05-30 15:45', '2022-08-31 17:15', 4, 8, 2),
-('Nightfall', '', 'Bronze Aqua Iguana', 'Argentina', '2022-02-06 06:30', '2022-02-20 19:00', 10, 5, 4),
-('Sky Guardian', '', 'Brass Orange Cow', 'Malaysia', '2022-05-07 10:45', '2022-06-07 17:00', 6, 4, 3);
+('Last Roar', 'Infiltrate the consolate and put our target\'s folder in the criminal records.', 'Titanium Green Leopard', 'Brazil', '2022-09-30 01:00', '2022-11-15 15:45', 3, 2, 2),
+('Ladies Glory', 'Get our target to spend his money on the new hospital charity.', 'Steel Turquoise Dog', 'Poland', '2022-12-25 00:00', '2022-12-26 00:00', 5, 7, 1),
+('Sleeping Eagle', 'Kidnap our target in order to have him cancel the fundraising for the creation of a nuclear power plant. Fight if necessary.', 'Lead Silver Shark', 'Indonesia', '2022-03-01 00:00', '2022-03-02 14:00', 7, 6, 4),
+('Acid Rain', 'Harass and blackmail our target to convince him to tell his wife about his mistress.', 'Diamond Pink Dolphin', 'Thailand', '2022-05-30 15:45', '2022-08-31 17:15', 4, 8, 2),
+('Nightfall', 'Trick our target in telling us about the location of the drug dealers HQs.', 'Bronze Aqua Iguana', 'Argentina', '2022-02-06 06:30', '2022-02-20 19:00', 10, 5, 4),
+('Sky Guardian', 'Rob the plans of the new army\'s submarine out of our target\'s safe.', 'Brass Orange Cow', 'Malaysia', '2022-05-07 10:45', '2022-06-07 17:00', 6, 4, 3);
 
 INSERT INTO agent_skill (agent_id, skill_id) VALUES 
 (1, 7),
