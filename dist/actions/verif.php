@@ -20,14 +20,14 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
     $count = $reponse['count(*)'];
     if ($count != 0) {
       $_SESSION['email'] = $email;
-      header('Location: back.php');
+      header('Location: ../missions.php');
     } else {
-      header('Location : login.php?erreur=1');
+      header('Location : ../login.php?erreur=1');
     }
   } else {
-    header('Location: login.php?erreur=2');
+    header('Location: ../login.php?erreur=2');
   }
 } else {
-  header('Location: login.php');
+  header('Location: ../login.php');
 }
 mysqli_close($db);

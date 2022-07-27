@@ -12,7 +12,7 @@
 
 <body>
   <nav class="flex justify-center mt-8 space-x-4">
-    <a href="../home.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Home</a>
+    <a href="../missions.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Missions</a>
     <a href="../agents.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Agents</a>
     <a href="../targets.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Targets</a>
     <a href="../contacts.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Contacts</a>
@@ -76,8 +76,25 @@
 try {
   $pdo = new PDO('mysql:host=localhost;dbname=spy', 'root', '');
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  $sql = "UPDATE hideout SET code = '$_POST[code]', address = '$_POST[address]', type = '$_POST[type]', country_id = '$_POST[country_id]', mission_id = '$_POST[mission_id]' WHERE id = '$_GET[modify]'";
-  $pdo->exec($sql);
+  $sql = "UPDATE hideout SET 
+  code = '$_POST[code]', 
+  address = '$_POST[address]', 
+  type = '$_POST[type]', 
+  country_id = '$_POST[country_id]', 
+  mission_id = '$_POST[mission_id]' 
+  WHERE id = '$_GET[modify]'";
+  foreach ($pdo->query("SELECT name FROM country WHERE id = '$_POST[country_id]'") as $c) {
+    foreach ($pdo->query("SELECT country FROM mission WHERE id = '$_POST[mission_id]'") as $m) {
+      if (($c['name'] != $m['country'])) {
+        header('Location: ../hideouts.php');
+        echo 'Hideout must be located in mission country';
+      } else {
+        $pdo->exec($reset);
+        $pdo->exec($sql);
+        header('Location: ../hideouts.php');
+      }
+    }
+  }
 } catch (PDOException $e) {
   echo $sql . '<br>' . $e->getMessage();
 }

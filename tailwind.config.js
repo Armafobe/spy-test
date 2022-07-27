@@ -1,15 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./dist/*.{php,js}"],
+  content: ["./dist/**/*.php"],
   theme: {
-    extend: {
-      transitionProperty: {
-        'height': 'height',
-        'padding': 'padding'
-      }
-    },
+    extend: {},
   },
   plugins: [
+    require('tailwindcss'),
+    require('autoprefixer'),
     require('@tailwindcss/forms'),
   ],
 }

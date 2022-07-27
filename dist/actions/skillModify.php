@@ -12,7 +12,7 @@
 
 <body>
   <nav class="flex justify-center mt-8 space-x-4">
-    <a href="../home.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Home</a>
+    <a href="../missions.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Missions</a>
     <a href="../agents.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Agents</a>
     <a href="../targets.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Targets</a>
     <a href="../contacts.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Contacts</a>
@@ -46,16 +46,6 @@
   </div>
   <br><br>
   </form>
-
-  <script>
-    let btn = document.getElementById('apply');
-
-    const change = () => {
-      btn.innerHTML = "Entity modified successfully !";
-    }
-
-    btn.addEventListener('click', change);
-  </script>
 </body>
 
 </html>

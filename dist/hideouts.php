@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+<?php session_start() ?>
 
 <head>
   <meta charset="UTF-8">
@@ -12,17 +13,31 @@
 
 <body>
   <nav class="flex justify-center mt-8 space-x-4">
-    <a href="home.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Home</a>
+    <a href="missions.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Missions</a>
     <a href="agents.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Agents</a>
     <a href="targets.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Targets</a>
     <a href="contacts.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Contacts</a>
     <a href="skills.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Skills</a>
     <a href="hideouts.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Hideouts</a>
-    <a href="login.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Login</a>
+    <?php
+    if (!isset($_SESSION['email'])) {
+    ?>
+      <a href="login.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Login</a>
+    <?php
+    } else {
+    ?>
+      <a href="logout.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Logout</a>
+    <?php
+    }
+    ?>
   </nav>
 
 
-  <div class="text-center rounded-lg bg-slate-700 text-white mt-4 p-4 sm:w-1/2 md:w-1/3 mx-auto">
+  <div class="text-center rounded-lg bg-slate-700 text-white mt-4 p-4 sm:w-1/2 md:w-1/3 mx-auto" <?php
+                                                                                                  if (!isset($_SESSION['email'])) {
+                                                                                                    echo 'style="display: none;"';
+                                                                                                  }
+                                                                                                  ?>>
     <p class="mb-3 underline">Add entity</p>
     <div class="mt-10 sm:mt-0">
       <div class="md:grid md:grid-cols-1">
@@ -47,17 +62,31 @@
                   </div>
 
                   <div class="col-span-6 sm:col-span-3">
-                    <label for="country_id" class="block text-sm font-medium text-gray-700">Country ID</label>
-                    <input type="number" name="country_id" id="country_id" min="1" max="15" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <label for="country_id" class="block text-sm font-medium text-gray-700">Country</label>
+                    <select required name="country_id" id="country_id" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                      <?php
+                      $pdo = new PDO('mysql:host=localhost;dbname=spy', 'root', '');
+                      foreach ($pdo->query("SELECT * FROM country") as $c) {
+                        echo '<option value="' . $c['id'] . '">' . $c['name'] . '</option>';
+                      }
+                      ?>
+                    </select>
                   </div>
 
                   <div class="col-span-6 sm:col-span-3">
-                    <label for="mission_id" class="block text-sm font-medium text-gray-700">Mission ID</label>
-                    <input type="number" name="mission_id" id="mission_id" min="1" max="10" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <label for="mission_id" class=" block text-sm font-medium text-gray-700">Mission</label>
+                    <select required name="mission_id" id="mission_id" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                      <?php
+                      $pdo = new PDO('mysql:host=localhost;dbname=spy', 'root', '');
+                      foreach ($pdo->query("SELECT * FROM mission") as $m) {
+                        echo '<option value="' . $m['id'] . '">' . $m['title'] . '</option>';
+                      }
+                      ?>
+                    </select>
                   </div>
                 </div>
 
-                <button type="submit" class="inline-flex justify-center mt-5 py-2 px-6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
+                <button type="submit" id="send" class="inline-flex justify-center mt-5 py-2 px-6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
               </div>
             </div>
           </form>
@@ -79,22 +108,28 @@
       echo $hideout['type'];
       echo '</p>';
       echo '<div class="flex space-x-4 justify-center">';
-      echo '<form action="./actions/hideoutModify.php" method="GET">';
-      echo '<button type="submit" value="' . $hideout['id'] . '" name="modify" class="mt-2 p-2 rounded-lg bg-green-600">';
-      echo 'Modify entity';
+      echo '<form action="./actions/hideoutInfo.php">';
+      echo '<button type="submit" value="' . $hideout['id'] . '" name="info" class="mt-2 p-2 w-32 rounded-lg hover:bg-cyan-700 bg-cyan-600">';
+      echo 'More info';
       echo '</button>';
       echo '</form>';
-      echo '<form action="./actions/hideoutDelete.php" method="POST">';
-      echo '<button type="submit" value="' . $hideout['code'] . '" name="delete" class="mt-2 p-2 rounded-lg bg-red-600">';
-      echo 'Delete entity';
-      echo '</button>';
-      echo '</form>';
+      if (isset($_SESSION['email'])) {
+        echo '<form action="./actions/hideoutModify.php">';
+        echo '<button type="submit" value="' . $hideout['id'] . '" name="modify" class="mt-2 p-2 w-32 rounded-lg hover:bg-green-700 bg-green-600">';
+        echo 'Modify entity';
+        echo '</button>';
+        echo '</form>';
+        echo '<form action="./actions/hideoutDelete.php" method="POST">';
+        echo '<button type="submit" value="' . $hideout['id'] . '" name="delete" class="mt-2 p-2 w-32 rounded-lg hover:bg-red-700/80 bg-red-600">';
+        echo 'Delete entity';
+        echo '</button>';
+        echo '</form>';
+      }
       echo '</div>';
       echo '</div>';
       echo "<br>";
     } ?>
   </div>
-
 </body>
 
 </html>
