@@ -1,3 +1,6 @@
+mysql://b78ed864a0c181:04b5dd0a@eu-cdbr-west-03.cleardb.net/heroku_61d2c598bdafa86?reconnect=true
+
+
 -- --------------------------------------------------------
 -- Hôte:                         127.0.0.1
 -- Version du serveur:           5.7.33 - MySQL Community Server (GPL)
