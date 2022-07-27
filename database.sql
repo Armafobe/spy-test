@@ -1,4 +1,4 @@
-mysql://b78ed864a0c181:04b5dd0a@eu-cdbr-west-03.cleardb.net/heroku_61d2c598bdafa86?reconnect=true
+mysql://ba008afa4d9a14:48bc42f5@us-cdbr-east-06.cleardb.net/heroku_3c2b29750d62481?reconnect=true
 
 
 -- --------------------------------------------------------
