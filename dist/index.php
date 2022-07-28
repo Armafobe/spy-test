@@ -8,7 +8,6 @@ $cleardb_password = $cleardb_url["pass"];
 $cleardb_db = substr($cleardb_url["path"], 1);
 $active_group = 'default';
 $query_builder = TRUE;
-$conn = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
 ?>
 
 <head>
@@ -22,26 +21,24 @@ $conn = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $c
 </head>
 
 <body>
-  <nav class="inline-flex sm:flex justify-center md:w-screen mt-8 space-x-4">
-    <div class="container flex flex-wrap justify-center items-center mx-auto">
-      <a href="index.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Missions</a>
-      <a href="agents.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Agents</a>
-      <a href="targets.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Targets</a>
-      <a href="contacts.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Contacts</a>
-      <a href="skills.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Skills</a>
-      <a href="hideouts.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Hideouts</a>
-      <?php
-      if (!isset($_SESSION['email'])) {
-      ?>
-        <a href="login.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Login</a>
-      <?php
-      } else {
-      ?>
-        <a href="logout.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Logout</a>
-      <?php
-      }
-      ?>
-    </div>
+  <nav class="flex flex-wrap sm:flex justify-center md:w-screen mt-8 space-x-4">
+    <a href="index.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Missions</a>
+    <a href="agents.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Agents</a>
+    <a href="targets.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Targets</a>
+    <a href="contacts.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Contacts</a>
+    <a href="skills.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Skills</a>
+    <a href="hideouts.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Hideouts</a>
+    <?php
+    if (!isset($_SESSION['email'])) {
+    ?>
+      <a href="login.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Login</a>
+    <?php
+    } else {
+    ?>
+      <a href="logout.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Logout</a>
+    <?php
+    }
+    ?>
   </nav>
 
   <form method="GET" action="#" class="mx-auto my-6 ms-4 sm:ml-4 sm:w-3/4">
@@ -208,6 +205,7 @@ $conn = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $c
   </div>
   <div class="block relative text-center py-8">
     <?php
+    $conn = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
     if (isset($_GET['search']) && !empty(trim($_GET['keywords']))) {
       $words = preg_split("/[\s,]+/", $_GET['keywords']);
       switch ($_GET['searchOption']) {
@@ -302,8 +300,6 @@ $conn = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $c
       echo "<br>";
     } ?>
   </div>
-
-  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 </body>
 
 </html>
