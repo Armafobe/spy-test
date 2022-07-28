@@ -1,5 +1,15 @@
 <!DOCTYPE html>
 <html lang="fr">
+<?php
+$cleardb_url = parse_url(getenv("DATABASE_URL"));
+$cleardb_server = $cleardb_url["host"];
+$cleardb_username = $cleardb_url["user"];
+$cleardb_password = $cleardb_url["pass"];
+$cleardb_db = substr($cleardb_url["path"], 1);
+$active_group = 'default';
+$query_builder = TRUE;
+$pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
+?>
 
 <head>
   <meta charset="UTF-8">
@@ -11,7 +21,7 @@
 </head>
 
 <body>
-  <nav class="flex justify-center mt-8 space-x-4">
+  <nav class="flex flex-wrap justify-around mx-auto w-full sm:w-1/2 mt-8 space-x-4">
     <a href="../index.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Missions</a>
     <a href="../agents.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Agents</a>
     <a href="../targets.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Targets</a>
@@ -65,8 +75,7 @@
                     <label for="nationality" class="block text-sm font-medium text-gray-700">Nationality</label>
                     <select required name="nationality" id="nationality" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                       <?php
-                      $pdo = new PDO('mysql:host=localhost;dbname=spy', 'root', '');
-                      foreach ($pdo->query("SELECT * FROM nationality") as $n) {
+                      foreach (mysqli_query($pdo, ("SELECT * FROM nationality")) as $n) {
                         echo '<option value="' . $n['id'] . '">' . $n['country'] . '</option>';
                       }
                       ?>
@@ -77,8 +86,7 @@
                     <label for="skill" class="block text-sm font-medium text-gray-700">Skill</label>
                     <select required name="skill" id="skill" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                       <?php
-                      $pdo = new PDO('mysql:host=localhost;dbname=spy', 'root', '');
-                      foreach ($pdo->query("SELECT * FROM skill") as $s) {
+                      foreach (mysqli_query($pdo, ("SELECT * FROM skill")) as $s) {
                         echo '<option value="' . $s['id'] . '">' . $s['name'] . '</option>';
                       }
                       ?>
@@ -102,13 +110,12 @@
 
 <?php
 try {
-  $pdo = new PDO('mysql:host=localhost;dbname=spy', 'root', '');
-  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   $sql = "UPDATE agent SET last_name = '$_POST[last_name]', first_name = '$_POST[first_name]', birth_date = '$_POST[birth_date]', code_id = '$_POST[code_id]', nationality_id = '$_POST[nationality]' WHERE id = '$_GET[modify]'";
-  foreach ($pdo->query("SELECT * from agent WHERE last_name = '$_POST[last_name]'") as $agent) {
+  foreach (mysqli_query($pdo, ("SELECT * from agent WHERE last_name = '$_POST[last_name]'")) as $agent) {
     $sql2 = "UPDATE agent_skill SET skill_id = '$_POST[skill]' WHERE agent_id = '$agent[id]'";
   }
-  $pdo->exec($sql);
+  mysqli_query($pdo, $sql);
+  mysqli_query($pdo, $sql2);
 } catch (PDOException $e) {
   echo $sql . '<br>' . $e->getMessage();
 }

@@ -1,18 +1,23 @@
 <?php
-
+$cleardb_url = parse_url(getenv("DATABASE_URL"));
+$cleardb_server = $cleardb_url["host"];
+$cleardb_username = $cleardb_url["user"];
+$cleardb_password = $cleardb_url["pass"];
+$cleardb_db = substr($cleardb_url["path"], 1);
+$active_group = 'default';
+$query_builder = TRUE;
 try {
-  $pdo = new PDO('mysql:host=localhost;dbname=spy', 'root', '');
-  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
   $reset = "ALTER TABLE hideout auto_increment = 0;";
   $sql = "INSERT INTO hideout (code, address, type, country_id, mission_id) VALUES ('$_POST[code]', '$_POST[address]', '$_POST[type]', '$_POST[country_id]', '$_POST[mission_id]')";
-  foreach ($pdo->query("SELECT name FROM country WHERE id = '$_POST[country_id]'") as $c) {
-    foreach ($pdo->query("SELECT country FROM mission WHERE id = '$_POST[mission_id]'") as $m) {
+  foreach (mysqli_query($pdo, "SELECT name FROM country WHERE id = '$_POST[country_id]'") as $c) {
+    foreach (mysqli_query($pdo, "SELECT country FROM mission WHERE id = '$_POST[mission_id]'") as $m) {
       if (($c['name'] != $m['country'])) {
         header('Location: ../hideouts.php');
         echo 'Hideout must be located in mission country';
       } else {
-        $pdo->exec($reset);
-        $pdo->exec($sql);
+        mysqli_query($pdo, $reset);
+        mysqli_query($pdo, $sql);
         header('Location: ../hideouts.php');
       }
     }

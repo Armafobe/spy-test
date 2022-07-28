@@ -1,5 +1,15 @@
 <!DOCTYPE html>
 <html lang="fr">
+<?php
+$cleardb_url = parse_url(getenv("DATABASE_URL"));
+$cleardb_server = $cleardb_url["host"];
+$cleardb_username = $cleardb_url["user"];
+$cleardb_password = $cleardb_url["pass"];
+$cleardb_db = substr($cleardb_url["path"], 1);
+$active_group = 'default';
+$query_builder = TRUE;
+$pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
+?>
 
 <head>
   <meta charset="UTF-8">
@@ -11,7 +21,7 @@
 </head>
 
 <body>
-  <nav class="flex justify-center mt-8 space-x-4">
+  <nav class="flex flex-wrap justify-around mx-auto w-full sm:w-1/2 mt-8 space-x-4">
     <a href="../index.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Missions</a>
     <a href="../agents.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Agents</a>
     <a href="../targets.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Targets</a>
@@ -62,10 +72,8 @@
 <?php
 
 try {
-  $pdo = new PDO('mysql:host=localhost;dbname=spy', 'root', '');
-  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   $sql = "UPDATE skill SET name = '$_POST[skill]' WHERE id = '$_GET[modify]'";
-  $pdo->exec($sql);
+  mysqli_query($pdo, $sql);
 } catch (PDOException $e) {
   echo $sql . '<br>' . $e->getMessage();
 }

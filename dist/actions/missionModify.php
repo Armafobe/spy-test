@@ -1,5 +1,15 @@
 <!DOCTYPE html>
 <html lang="fr">
+<?php
+$cleardb_url = parse_url(getenv("DATABASE_URL"));
+$cleardb_server = $cleardb_url["host"];
+$cleardb_username = $cleardb_url["user"];
+$cleardb_password = $cleardb_url["pass"];
+$cleardb_db = substr($cleardb_url["path"], 1);
+$active_group = 'default';
+$query_builder = TRUE;
+$pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
+?>
 
 <head>
   <meta charset="UTF-8">
@@ -12,7 +22,7 @@
 </head>
 
 <body>
-  <nav class="flex justify-center mt-8 space-x-4">
+  <nav class="flex flex-wrap justify-around mx-auto w-full sm:w-1/2 mt-8 space-x-4">
     <a href="../index.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Missions</a>
     <a href="../agents.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Agents</a>
     <a href="../targets.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Targets</a>
@@ -60,8 +70,7 @@
                     <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
                     <select required name="country" id="country" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                       <?php
-                      $pdo = new PDO('mysql:host=localhost;dbname=spy', 'root', '');
-                      foreach ($pdo->query("SELECT * FROM country") as $c) {
+                      foreach (mysqli_query($pdo, "SELECT * FROM country") as $c) {
                         echo '<option value="' . $c['name'] . '">' . $c['name'] . '</option>';
                       }
                       ?>
@@ -82,8 +91,7 @@
                     <label for="skill" class=" block text-sm font-medium text-gray-700">Required Skill</label>
                     <select required name="skill" id="skill" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                       <?php
-                      $pdo = new PDO('mysql:host=localhost;dbname=spy', 'root', '');
-                      foreach ($pdo->query("SELECT * FROM skill") as $s) {
+                      foreach (mysqli_query($pdo, "SELECT * FROM skill") as $s) {
                         echo '<option value="' . $s['id'] . '">' . $s['name'] . '</option>';
                       }
                       ?>
@@ -94,8 +102,7 @@
                     <label for="mission_type_id" class=" block text-sm font-medium text-gray-700">Mission Type</label>
                     <select required name="mission_type_id" id="mission_type_id" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                       <?php
-                      $pdo = new PDO('mysql:host=localhost;dbname=spy', 'root', '');
-                      foreach ($pdo->query("SELECT * FROM mission_type") as $mt) {
+                      foreach (mysqli_query($pdo, "SELECT * FROM mission_type") as $mt) {
                         echo '<option value="' . $mt['id'] . '">' . $mt['type'] . '</option>';
                       }
                       ?>
@@ -106,8 +113,7 @@
                     <label for="mission_status_id" class=" block text-sm font-medium text-gray-700">Mission Status</label>
                     <select required name="mission_status_id" id="mission_status_id" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                       <?php
-                      $pdo = new PDO('mysql:host=localhost;dbname=spy', 'root', '');
-                      foreach ($pdo->query("SELECT * FROM mission_status") as $ms) {
+                      foreach (mysqli_query($pdo, "SELECT * FROM mission_status") as $ms) {
                         echo '<option value="' . $ms['id'] . '">' . $ms['status'] . '</option>';
                       }
                       ?>
@@ -118,8 +124,7 @@
                     <label for="contact_id" class=" block text-sm font-medium text-gray-700">Contact</label>
                     <select required name="contact_id" id="contact_id" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                       <?php
-                      $pdo = new PDO('mysql:host=localhost;dbname=spy', 'root', '');
-                      foreach ($pdo->query("SELECT * FROM contact") as $c) {
+                      foreach (mysqli_query($pdo, "SELECT * FROM contact") as $c) {
                         echo '<option value="' . $c['id'] . '">' . $c['last_name'] . ' ' . $c['first_name'] . '</option>';
                       }
                       ?>
@@ -130,8 +135,7 @@
                     <label for="agent_id" class=" block text-sm font-medium text-gray-700">Assigned Agent</label>
                     <select required name="agent_id" id="agent_id" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                       <?php
-                      $pdo = new PDO('mysql:host=localhost;dbname=spy', 'root', '');
-                      foreach ($pdo->query("SELECT * FROM agent") as $a) {
+                      foreach (mysqli_query($pdo, "SELECT * FROM agent") as $a) {
                         echo '<option value="' . $a['id'] . '">' . $a['last_name'] . ' ' . $a['first_name'] . '</option>';
                       }
                       ?>
@@ -143,8 +147,7 @@
                     <select name="agent_id_2" id="agent_id_2" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                       <option value="">None</option>
                       <?php
-                      $pdo = new PDO('mysql:host=localhost;dbname=spy', 'root', '');
-                      foreach ($pdo->query("SELECT * FROM agent") as $a) {
+                      foreach (mysqli_query($pdo, "SELECT * FROM agent") as $a) {
                         echo '<option value="' . $a['id'] . '">' . $a['last_name'] . ' ' . $a['first_name'] . '</option>';
                       }
                       ?>
@@ -169,8 +172,6 @@
 <?php
 
 try {
-  $pdo = new PDO('mysql:host=localhost;dbname=spy', 'root', '');
-  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   $reset = "ALTER TABLE mission auto_increment = 0;";
   $sql = "UPDATE mission SET 
   title = '$_POST[title]', 
@@ -183,36 +184,36 @@ try {
   mission_type_id = '$_POST[mission_type_id]',
   mission_status_id = '$_POST[mission_status_id]'
   WHERE id = '$_GET[modify]'";
-  foreach ($pdo->query("SELECT * FROM country WHERE name = '$_POST[country]'") as $country) {
-    foreach ($pdo->query("SELECT * FROM contact WHERE id = '$_POST[contact_id]'") as $contact) {
+  foreach (mysqli_query($pdo, "SELECT * FROM country WHERE name = '$_POST[country]'") as $country) {
+    foreach (mysqli_query($pdo, "SELECT * FROM contact WHERE id = '$_POST[contact_id]'") as $contact) {
       if ($country['id'] != $contact['nationality_id']) {
         header('Location: ../missions.php');
         echo '<p>Selected country must have contact with same nationality</p>';
       } else {
-        foreach ($pdo->query("SELECT * FROM agent_skill WHERE agent_id = '$_POST[agent_id]' OR agent_id = '$_POST[agent_id_2]'") as $agent) {
+        foreach (mysqli_query($pdo, "SELECT * FROM agent_skill WHERE agent_id = '$_POST[agent_id]' OR agent_id = '$_POST[agent_id_2]'") as $agent) {
           if ($agent['skill_id'] != $_POST['skill']) {
             header('Location: ../missions.php');
             echo '<p>One of the two agents must have required skill</p>';
           } else {
-            $pdo->exec($reset);
+            mysqli_query($pdo, $reset);
             if ($_POST['agent_id_2'] == $_POST['agent_id']) {
               header('Location: ../missions.php');
               echo '<p></p>';
             } else if (!$_POST['agent_id_2']) {
-              $pdo->exec($sql);
-              foreach ($pdo->query("SELECT * FROM mission WHERE title = '$_POST[title]'") as $m) {
-                $pdo->exec("UPDATE mission_agent SET mission_id = '$m[id]', agent_id = '$_POST[agent_id]'");
+              mysqli_query($pdo, $sql);
+              foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE title = '$_POST[title]'") as $m) {
+                mysqli_query($pdo, "UPDATE mission_agent SET mission_id = '$m[id]', agent_id = '$_POST[agent_id]'");
               }
             } else {
-              $pdo->exec($sql);
-              foreach ($pdo->query("SELECT * FROM mission WHERE title = '$_POST[title]'") as $m) {
-                $pdo->exec("DELETE FROM mission_agent WHERE mission_id = '$m[id]'");
-                $pdo->exec("INSERT INTO mission_agent (mission_id, agent_id) VALUES ('$m[id]', '$_POST[agent_id]'), ('$m[id]', '$_POST[agent_id_2]')");;
+              mysqli_query($pdo, $sql);
+              foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE title = '$_POST[title]'") as $m) {
+                mysqli_query($pdo, "DELETE FROM mission_agent WHERE mission_id = '$m[id]'");
+                mysqli_query($pdo, "INSERT INTO mission_agent (mission_id, agent_id) VALUES ('$m[id]', '$_POST[agent_id]'), ('$m[id]', '$_POST[agent_id_2]')");;
               }
             }
           };
-          foreach ($pdo->query("SELECT * FROM mission WHERE title = '$_POST[title]'") as $m) {
-            $pdo->exec("UPDATE mission_contact SET contact_id = '$_POST[contact_id]' WHERE mission_id = '$m[id]'");
+          foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE title = '$_POST[title]'") as $m) {
+            mysqli_query($pdo, "UPDATE mission_contact SET contact_id = '$_POST[contact_id]' WHERE mission_id = '$m[id]'");
           }
           header('Location: ../missions.php');
         }

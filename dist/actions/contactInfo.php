@@ -1,5 +1,15 @@
 <!DOCTYPE html>
 <html lang="fr">
+<?php
+$cleardb_url = parse_url(getenv("DATABASE_URL"));
+$cleardb_server = $cleardb_url["host"];
+$cleardb_username = $cleardb_url["user"];
+$cleardb_password = $cleardb_url["pass"];
+$cleardb_db = substr($cleardb_url["path"], 1);
+$active_group = 'default';
+$query_builder = TRUE;
+$pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
+?>
 
 <head>
   <meta charset="UTF-8">
@@ -11,7 +21,7 @@
 </head>
 
 <body>
-  <nav class="flex justify-center mt-8 space-x-4">
+  <nav class="flex flex-wrap justify-around mx-auto w-full sm:w-1/2 mt-8 space-x-4">
     <a href="../index.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Missions</a>
     <a href="../agents.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Agents</a>
     <a href="../targets.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Targets</a>
@@ -34,8 +44,8 @@
   <div class="flex h-full">
     <div class="text-center rounded-lg text-white bg-slate-700 py-8 p-4 sm:w-1/2 md:w-1/3 m-auto">
       <?php
-      $pdo = new PDO('mysql:host=localhost;dbname=spy', 'root', '');
-      foreach ($pdo->query("SELECT * FROM contact WHERE id = '$_GET[info]'") as $contact) {
+
+      foreach (mysqli_query($pdo, ("SELECT * FROM contact WHERE id = '$_GET[info]'")) as $contact) {
         echo '<div class="mx-auto w-1/2 rounded-lg bg-gray-100/50 p-6 m-4">';
         echo '<p class="text-slate-700">Last Name</p>';
         echo '<p class="overline text-sm ">';
@@ -52,7 +62,7 @@
         echo '<p class="overline text-sm">';
         echo $contact['code_name'] . '<br>' . '<br>';
         echo '</p>';
-        foreach ($pdo->query("SELECT * FROM nationality WHERE id = '$contact[nationality_id]'") as $n) {
+        foreach (mysqli_query($pdo, ("SELECT * FROM nationality WHERE id = '$contact[nationality_id]'")) as $n) {
           echo '<p class="text-slate-700">Nationality</p>';
           echo '<p class="overline text-sm">';
           echo $n['country'] . '<br>' . '<br>';
