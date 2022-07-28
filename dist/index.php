@@ -205,7 +205,7 @@ $query_builder = TRUE;
   </div>
   <div class="block relative text-center py-8">
     <?php
-    $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
+    $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db());
     if (isset($_GET['search']) && !empty(trim($_GET['keywords']))) {
       $words = preg_split("/[\s,]+/", $_GET['keywords']);
       switch ($_GET['searchOption']) {
