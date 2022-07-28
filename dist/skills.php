@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <?php session_start();
-$cleardb_url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+$cleardb_url = parse_url(getenv("DATABASE_URL"));
 $cleardb_server = $cleardb_url["host"];
 $cleardb_username = $cleardb_url["user"];
 $cleardb_password = $cleardb_url["pass"];
@@ -16,7 +16,7 @@ $query_builder = TRUE;
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./output.css">
   <link rel="stylesheet" href="../css/styles.css">
-  <title>Targets</title>
+  <title>Skills</title>
 </head>
 
 <body>
