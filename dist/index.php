@@ -8,7 +8,6 @@ $cleardb_password = $cleardb_url["pass"];
 $cleardb_db = substr($cleardb_url["path"], 1);
 $active_group = 'default';
 $query_builder = TRUE;
-$pdo = new PDO("mysql:host='$cleardb_server';dbname='$cleardb_db'', $cleardb_username, $cleardb_password");
 ?>
 
 <head>
@@ -206,6 +205,7 @@ $pdo = new PDO("mysql:host='$cleardb_server';dbname='$cleardb_db'', $cleardb_use
   </div>
   <div class="block relative text-center py-8">
     <?php
+    $pdo = new PDO("mysql:host='$cleardb_server';dbname='$cleardb_db'', $cleardb_username, $cleardb_password");
     if (isset($_GET['search']) && !empty(trim($_GET['keywords']))) {
       $words = preg_split("/[\s,]+/", $_GET['keywords']);
       switch ($_GET['searchOption']) {
