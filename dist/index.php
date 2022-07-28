@@ -14,7 +14,7 @@
 
 <body>
   <nav class="inline-flex sm:flex justify-center md:w-screen mt-8 space-x-4">
-    <div class="container flex flex-wrap justify-around items-center mx-auto">
+    <div class="container flex flex-wrap justify-center items-center mx-auto">
       <a href="index.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Missions</a>
       <a href="agents.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Agents</a>
       <a href="targets.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Targets</a>
