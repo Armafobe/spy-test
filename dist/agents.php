@@ -8,6 +8,7 @@ $cleardb_password = $cleardb_url["pass"];
 $cleardb_db = substr($cleardb_url["path"], 1);
 $active_group = 'default';
 $query_builder = TRUE;
+$pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
 ?>
 
 <head>
@@ -80,8 +81,7 @@ $query_builder = TRUE;
                     <label for="nationality" class="block text-sm font-medium text-gray-700">Nationality</label>
                     <select required name="nationality" id="nationality" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                       <?php
-                      $pdo = new PDO('mysql:host=localhost;dbname=spy', 'root', '');
-                      foreach ($pdo->query("SELECT * FROM nationality") as $n) {
+                      foreach (mysqli_query($pdo, ("SELECT * FROM nationality")) as $n) {
                         echo '<option value="' . $n['id'] . '">' . $n['country'] . '</option>';
                       }
                       ?>
@@ -92,8 +92,7 @@ $query_builder = TRUE;
                     <label for="skill" class="block text-sm font-medium text-gray-700">Skill</label>
                     <select required name="skill" id="skill" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                       <?php
-                      $pdo = new PDO('mysql:host=localhost;dbname=spy', 'root', '');
-                      foreach ($pdo->query("SELECT * FROM skill") as $s) {
+                      foreach (mysqli_query($pdo, ("SELECT * FROM skill")) as $s) {
                         echo '<option value="' . $s['id'] . '">' . $s['name'] . '</option>';
                       }
                       ?>
@@ -112,7 +111,6 @@ $query_builder = TRUE;
   </div>
   <div class="block text-center py-8">
     <?php
-    $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
     foreach (mysqli_query($pdo, ('SELECT * FROM agent')) as $agent) {
       echo '<div class="mx-auto w-1/2 rounded-lg bg-gray-100/50 p-6 m-4">';
       echo $agent['last_name'] . '<br>';

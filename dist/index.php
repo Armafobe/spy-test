@@ -8,6 +8,7 @@ $cleardb_password = $cleardb_url["pass"];
 $cleardb_db = substr($cleardb_url["path"], 1);
 $active_group = 'default';
 $query_builder = TRUE;
+$pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
 ?>
 
 <head>
@@ -100,8 +101,7 @@ $query_builder = TRUE;
                     <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
                     <select required name="country" id="country" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                       <?php
-                      $pdo = new PDO('mysql:host=localhost;dbname=spy', 'root', '');
-                      foreach ($pdo->query("SELECT * FROM country") as $c) {
+                      foreach (mysqli_query($pdo, ("SELECT * FROM country")) as $c) {
                         echo '<option value="' . $c['name'] . '">' . $c['name'] . '</option>';
                       }
                       ?>
@@ -122,8 +122,7 @@ $query_builder = TRUE;
                     <label for="skill" class=" block text-sm font-medium text-gray-700">Required Skill</label>
                     <select required name="skill" id="skill" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                       <?php
-                      $pdo = new PDO('mysql:host=localhost;dbname=spy', 'root', '');
-                      foreach ($pdo->query("SELECT * FROM skill") as $s) {
+                      foreach (mysqli_query($pdo, ("SELECT * FROM skill")) as $s) {
                         echo '<option value="' . $s['id'] . '">' . $s['name'] . '</option>';
                       }
                       ?>
@@ -134,8 +133,7 @@ $query_builder = TRUE;
                     <label for="mission_type_id" class=" block text-sm font-medium text-gray-700">Mission Type</label>
                     <select required name="mission_type_id" id="mission_type_id" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                       <?php
-                      $pdo = new PDO('mysql:host=localhost;dbname=spy', 'root', '');
-                      foreach ($pdo->query("SELECT * FROM mission_type") as $mt) {
+                      foreach (mysqli_query($pdo, ("SELECT * FROM mission_type")) as $mt) {
                         echo '<option value="' . $mt['id'] . '">' . $mt['type'] . '</option>';
                       }
                       ?>
@@ -146,8 +144,7 @@ $query_builder = TRUE;
                     <label for="mission_status_id" class=" block text-sm font-medium text-gray-700">Mission Status</label>
                     <select required name="mission_status_id" id="mission_status_id" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                       <?php
-                      $pdo = new PDO('mysql:host=localhost;dbname=spy', 'root', '');
-                      foreach ($pdo->query("SELECT * FROM mission_status") as $ms) {
+                      foreach (mysqli_query($pdo, ("SELECT * FROM mission_status")) as $ms) {
                         echo '<option value="' . $ms['id'] . '">' . $ms['status'] . '</option>';
                       }
                       ?>
@@ -158,9 +155,8 @@ $query_builder = TRUE;
                     <label for="contact_id" class=" block text-sm font-medium text-gray-700">Contact</label>
                     <select required name="contact_id" id="contact_id" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                       <?php
-                      $pdo = new PDO('mysql:host=localhost;dbname=spy', 'root', '');
-                      foreach ($pdo->query("SELECT * FROM contact") as $c) {
-                        foreach ($pdo->query("SELECT * FROM country WHERE id = $c[nationality_id]") as $n) {
+                      foreach (mysqli_query($pdo, ("SELECT * FROM contact")) as $c) {
+                        foreach (mysqli_query($pdo, ("SELECT * FROM country WHERE id = $c[nationality_id]")) as $n) {
                           echo '<option value="' . $c['id'] . '">' . $c['last_name'] . ' ' . $c['first_name'] . ' - ' . $n['name'] . '</option>';
                         }
                       }
@@ -172,8 +168,7 @@ $query_builder = TRUE;
                     <label for="agent_id" class=" block text-sm font-medium text-gray-700">Assigned Agent</label>
                     <select required name="agent_id" id="agent_id" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                       <?php
-                      $pdo = new PDO('mysql:host=localhost;dbname=spy', 'root', '');
-                      foreach ($pdo->query("SELECT * FROM agent") as $a) {
+                      foreach (mysqli_query($pdo, ("SELECT * FROM agent")) as $a) {
                         echo '<option value="' . $a['id'] . '">' . $a['last_name'] . ' ' . $a['first_name'] . '</option>';
                       }
                       ?>
@@ -185,8 +180,7 @@ $query_builder = TRUE;
                     <select name="agent_id_2" id="agent_id_2" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                       <option value="">None</option>
                       <?php
-                      $pdo = new PDO('mysql:host=localhost;dbname=spy', 'root', '');
-                      foreach ($pdo->query("SELECT * FROM agent") as $a) {
+                      foreach (mysqli_query($pdo, ("SELECT * FROM agent")) as $a) {
                         echo '<option value="' . $a['id'] . '">' . $a['last_name'] . ' ' . $a['first_name'] . '</option>';
                       }
                       ?>
@@ -205,7 +199,6 @@ $query_builder = TRUE;
   </div>
   <div class="block relative text-center py-8">
     <?php
-    $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db());
     if (isset($_GET['search']) && !empty(trim($_GET['keywords']))) {
       $words = preg_split("/[\s,]+/", $_GET['keywords']);
       switch ($_GET['searchOption']) {
