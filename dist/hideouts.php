@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
 <?php session_start();
-$cleardb_url = parse_url("mysql://ba008afa4d9a14:48bc42f5@us-cdbr-east-06.cleardb.net/heroku_3c2b29750d62481?reconnect=true");
+$cleardb_url = parse_url(getenv("DATABASE_URL"));
 $cleardb_server = $cleardb_url["host"];
 $cleardb_username = $cleardb_url["user"];
 $cleardb_password = $cleardb_url["pass"];
 $cleardb_db = substr($cleardb_url["path"], 1);
 $active_group = 'default';
 $query_builder = TRUE;
-$conn = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
 ?>
 
 <head>
@@ -106,8 +105,8 @@ $conn = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $c
   </div>
   <div class="block text-center py-8">
     <?php
-    $pdo = new PDO('mysql:host=localhost;dbname=spy', 'root', '');
-    foreach ($pdo->query('SELECT * FROM hideout') as $hideout) {
+    $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
+    foreach (mysqli_query($pdo, ('SELECT * FROM hideout')) as $hideout) {
       echo '<div class="mx-auto w-1/2 rounded-lg bg-gray-100/50 p-6 m-4">';
       echo $hideout['code'] . '<br>';
       echo '<p class="overline text-sm text-slate-500">';

@@ -270,8 +270,7 @@ $query_builder = TRUE;
       $sql = "SELECT * FROM mission";
     }
 
-
-    foreach (mysqli_query($pdo, $sql) as $mission) {
+    foreach (mysqli_query($pdo, ($sql)) as $mission) {
       echo '<div class="mx-auto w-3/4 md:w-1/2 rounded-lg bg-gray-100/50 p-6 m-4">';
       echo $mission['title'] . '<br>';
       echo '<p class="overline text-sm text-slate-500">';
