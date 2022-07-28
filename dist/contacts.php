@@ -8,6 +8,7 @@ $cleardb_password = $cleardb_url["pass"];
 $cleardb_db = substr($cleardb_url["path"], 1);
 $active_group = 'default';
 $query_builder = TRUE;
+$pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
 ?>
 
 <head>
@@ -20,7 +21,7 @@ $query_builder = TRUE;
 </head>
 
 <body>
-  <nav class="flex justify-center mt-8 space-x-4">
+  <nav class="flex flex-wrap sm:flex justify-around mx-auto w-full sm:w-1/2 mt-8 space-x-4">
     <a href="index.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Missions</a>
     <a href="agents.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Agents</a>
     <a href="targets.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Targets</a>
@@ -78,9 +79,8 @@ $query_builder = TRUE;
                     <label for="nationality" class="block text-sm font-medium text-gray-700">Nationality</label>
                     <select required name="nationality" id="nationality" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                       <?php
-                      $pdo = new PDO('mysql:host=localhost;dbname=spy', 'root', '');
-                      foreach ($pdo->query("SELECT * FROM nationality") as $n) {
-                        echo '<option value="' . $n['id'] . '" style="font-family: Inter">' . $n['country'] . '</option>';
+                      foreach (mysqli_query($pdo, ("SELECT * FROM nationality")) as $n) {
+                        echo '<option value="' . $n['id'] . '">' . $n['country'] . '</option>';
                       }
                       ?>
                     </select>
@@ -98,7 +98,6 @@ $query_builder = TRUE;
   </div>
   <div class="block text-center py-8">
     <?php
-    $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
     foreach (mysqli_query($pdo, ('SELECT * FROM contact')) as $contact) {
       echo '<div class="mx-auto w-1/2 rounded-lg bg-gray-100/50 p-6 m-4">';
       echo $contact['last_name'] . '<br>';
