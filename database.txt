@@ -1,0 +1,384 @@
+mysql://ba008afa4d9a14:48bc42f5@us-cdbr-east-06.cleardb.net/heroku_3c2b29750d62481?reconnect=true
+
+-- --------------------------------------------------------
+-- Hôte:                         127.0.0.1
+-- Version du serveur:           5.7.33 - MySQL Community Server (GPL)
+-- SE du serveur:                Win64
+-- HeidiSQL Version:             11.2.0.6213
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+-- Listage de la structure de la base pour spy
+CREATE DATABASE IF NOT EXISTS `spy` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+USE `spy`;
+
+-- Listage de la structure de la table spy. admin
+CREATE TABLE IF NOT EXISTS `admin` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `last_name` varchar(60) NOT NULL,
+  `first_name` varchar(60) NOT NULL,
+  `email` char(100) NOT NULL,
+  `password` char(255) NOT NULL,
+  `creation_date` date NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+
+-- Listage des données de la table spy.admin : ~3 rows (environ)
+/*!40000 ALTER TABLE `admin` DISABLE KEYS */;
+INSERT INTO `admin` (`id`, `last_name`, `first_name`, `email`, `password`, `creation_date`) VALUES
+	(1, 'Prudence', 'Liza', 'lprudence0@addthis.com', '$2y$10$CEhIIG8lC6cU1q9GiJcjJOuQYcnfwR8qr3EREbiai5pGidjtIFp16', '2022-02-15'),
+	(2, 'Pulsford', 'Katalin', 'kpulsford1@salon.com', '$2y$10$I3DXwNiQcDdplVbjkf78ZeKZyRgaigmmvG5IuG.YYpjaLWWIiSXu6', '2021-07-15'),
+	(3, 'Godin', 'Jamison', 'jgodin2@reverbnation.com', '$2y$10$374x6zHaEL0WIQf31Qlvwegpe.seEO1QCrcMpYQ9XcD17ADQY7Osi', '2022-04-10');
+/*!40000 ALTER TABLE `admin` ENABLE KEYS */;
+
+-- Listage de la structure de la table spy. agent
+CREATE TABLE IF NOT EXISTS `agent` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `last_name` varchar(60) NOT NULL,
+  `first_name` varchar(60) NOT NULL,
+  `birth_date` date NOT NULL,
+  `code_id` char(60) NOT NULL,
+  `nationality_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_nationality_id` (`nationality_id`),
+  CONSTRAINT `FK_nationality_id` FOREIGN KEY (`nationality_id`) REFERENCES `nationality` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+
+-- Listage des données de la table spy.agent : ~5 rows (environ)
+/*!40000 ALTER TABLE `agent` DISABLE KEYS */;
+INSERT INTO `agent` (`id`, `last_name`, `first_name`, `birth_date`, `code_id`, `nationality_id`) VALUES
+	(1, 'Aubry', 'Melody', '1986-01-18', 'UBG1PJ', 4),
+	(2, 'Teas', 'Ronni', '1993-08-18', 'CDGP7U', 2),
+	(3, 'McDuffie', 'Oren', '1994-10-04', '0357NJ', 12),
+	(4, 'Faulkes', 'Georgie', '1987-12-28', 'P77TWD', 1),
+	(5, 'Chue', 'Clarette', '1968-12-30', 'ORCX8Q', 7);
+/*!40000 ALTER TABLE `agent` ENABLE KEYS */;
+
+-- Listage de la structure de la table spy. agent_skill
+CREATE TABLE IF NOT EXISTS `agent_skill` (
+  `agent_id` int(11) NOT NULL,
+  `skill_id` int(11) NOT NULL,
+  PRIMARY KEY (`agent_id`,`skill_id`),
+  KEY `FK_skill_id` (`skill_id`),
+  CONSTRAINT `FK_agent_id` FOREIGN KEY (`agent_id`) REFERENCES `agent` (`id`),
+  CONSTRAINT `FK_skill_id` FOREIGN KEY (`skill_id`) REFERENCES `skill` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Listage des données de la table spy.agent_skill : ~10 rows (environ)
+/*!40000 ALTER TABLE `agent_skill` DISABLE KEYS */;
+INSERT INTO `agent_skill` (`agent_id`, `skill_id`) VALUES
+	(2, 1),
+	(3, 2),
+	(4, 3),
+	(2, 4),
+	(3, 5),
+	(4, 6),
+	(1, 7),
+	(1, 8),
+	(5, 9),
+	(3, 10);
+/*!40000 ALTER TABLE `agent_skill` ENABLE KEYS */;
+
+-- Listage de la structure de la table spy. contact
+CREATE TABLE IF NOT EXISTS `contact` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `last_name` varchar(60) NOT NULL,
+  `first_name` varchar(60) NOT NULL,
+  `birth_date` date NOT NULL,
+  `code_name` varchar(60) NOT NULL,
+  `nationality_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_nationality_id_contact` (`nationality_id`),
+  CONSTRAINT `FK_nationality_id_contact` FOREIGN KEY (`nationality_id`) REFERENCES `nationality` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
+
+-- Listage des données de la table spy.contact : ~15 rows (environ)
+/*!40000 ALTER TABLE `contact` DISABLE KEYS */;
+INSERT INTO `contact` (`id`, `last_name`, `first_name`, `birth_date`, `code_name`, `nationality_id`) VALUES
+	(1, 'Lucken', 'Michelle', '1982-08-02', 'Pohlia Moss', 1),
+	(2, 'Ebden', 'Kayle', '1997-04-03', 'Kobuk Locoweed', 2),
+	(3, 'MacElharge', 'Rolfe', '1979-01-06', 'Balansa Clover', 3),
+	(4, 'Lavin', 'Jens', '1975-06-26', 'Ponderosa Violet', 4),
+	(5, 'Lillford', 'Philbert', '1974-07-01', 'Hill Cane', 5),
+	(6, 'Fantone', 'Becki', '1975-10-16', 'Hound\'s Tongue', 6),
+	(7, 'Fraser', 'Christine', '1972-03-01', 'Eggyolk Lichen', 7),
+	(8, 'Le Surf', 'Brodie', '1975-07-25', 'Bog Rosemary', 8),
+	(9, 'Ricardin', 'Cristen', '1975-04-12', 'Monkeypuzzle Tree', 9),
+	(10, 'Isaacson', 'Olwen', '1998-09-10', 'September Elm', 10),
+	(11, 'Oulett', 'Emmit', '1990-09-21', 'Stalkless Yellowcress', 11),
+	(12, 'Lidgley', 'Richie', '1968-11-04', 'Weinmannia', 12),
+	(13, 'Corriea', 'Freemon', '1984-02-15', 'Canadian Blacksnakeroot', 13),
+	(14, 'Deppe', 'Truman', '1991-11-15', 'Chokeberry', 14),
+	(15, 'Endricci', 'Paloma', '1968-03-28', 'Stoloniferous Pussytoes', 15);
+/*!40000 ALTER TABLE `contact` ENABLE KEYS */;
+
+-- Listage de la structure de la table spy. country
+CREATE TABLE IF NOT EXISTS `country` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(60) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
+
+-- Listage des données de la table spy.country : ~15 rows (environ)
+/*!40000 ALTER TABLE `country` DISABLE KEYS */;
+INSERT INTO `country` (`id`, `name`) VALUES
+	(1, 'Indonesia'),
+	(2, 'Poland'),
+	(3, 'Thailand'),
+	(4, 'Brazil'),
+	(5, 'Sweden'),
+	(6, 'Haiti'),
+	(7, 'Vietnam'),
+	(8, 'Morocco'),
+	(9, 'Malaysia'),
+	(10, 'China'),
+	(11, 'Colombia'),
+	(12, 'Uzbekistan'),
+	(13, 'Philippines'),
+	(14, 'Argentina'),
+	(15, 'Finland');
+/*!40000 ALTER TABLE `country` ENABLE KEYS */;
+
+-- Listage de la structure de la table spy. hideout
+CREATE TABLE IF NOT EXISTS `hideout` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `code` char(60) NOT NULL,
+  `address` varchar(100) NOT NULL,
+  `type` varchar(100) NOT NULL,
+  `country_id` int(11) NOT NULL,
+  `mission_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_country_id` (`country_id`),
+  KEY `FK_mission_id_hideout` (`mission_id`),
+  CONSTRAINT `FK_country_id` FOREIGN KEY (`country_id`) REFERENCES `country` (`id`),
+  CONSTRAINT `FK_mission_id_hideout` FOREIGN KEY (`mission_id`) REFERENCES `mission` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+
+-- Listage des données de la table spy.hideout : ~6 rows (environ)
+/*!40000 ALTER TABLE `hideout` DISABLE KEYS */;
+INSERT INTO `hideout` (`id`, `code`, `address`, `type`, `country_id`, `mission_id`) VALUES
+	(1, 'Shadow Cover', '4889 Bunker Hill Hill', 'Basement', 9, 10),
+	(2, 'Deepmantle Harbor', '50994 Messerschmidt Point', 'Barber Shop', 2, 6),
+	(3, 'Nightshield Escape', '2794 Fulton Circle', 'Attic', 3, 8),
+	(4, 'Monolith Haven', '56 Walton Center', 'Opera Lodge', 14, 9),
+	(5, 'Sisterhood Cave', '3008 Anniversary Alley', 'Yacht', 8, 1),
+	(6, 'Lightwork Hideaway', '2451 Golf Course Junction', 'Retirement Home', 4, 5);
+/*!40000 ALTER TABLE `hideout` ENABLE KEYS */;
+
+-- Listage de la structure de la table spy. mission
+CREATE TABLE IF NOT EXISTS `mission` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(60) NOT NULL,
+  `description` tinytext NOT NULL,
+  `code_name` varchar(60) DEFAULT NULL,
+  `country` varchar(60) NOT NULL,
+  `start_date` datetime NOT NULL,
+  `end_date` datetime NOT NULL,
+  `skill_id` int(11) NOT NULL,
+  `mission_type_id` int(11) NOT NULL,
+  `mission_status_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_skill_id_mission` (`skill_id`),
+  KEY `FK_mission_type_id` (`mission_type_id`),
+  KEY `FK_mission_status_id` (`mission_status_id`),
+  CONSTRAINT `FK_mission_status_id` FOREIGN KEY (`mission_status_id`) REFERENCES `mission_status` (`id`),
+  CONSTRAINT `FK_mission_type_id` FOREIGN KEY (`mission_type_id`) REFERENCES `mission_type` (`id`),
+  CONSTRAINT `FK_skill_id_mission` FOREIGN KEY (`skill_id`) REFERENCES `skill` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+
+-- Listage des données de la table spy.mission : ~10 rows (environ)
+/*!40000 ALTER TABLE `mission` DISABLE KEYS */;
+INSERT INTO `mission` (`id`, `title`, `description`, `code_name`, `country`, `start_date`, `end_date`, `skill_id`, `mission_type_id`, `mission_status_id`) VALUES
+	(1, 'Return of the Scorpions', 'Have the heir of the French family Belmont tell us whether he\'s a member of a cult.', 'Gold Lime Lion', 'Morocco', '2022-07-01 09:00:00', '2022-08-01 00:00:00', 2, 5, 2),
+	(2, 'Darkest Hope', 'Find the target\'s offshore bank account and transfer the savings on Saint-Joseph orphanage.', 'Platinum Purple Cat', 'Haiti', '2022-08-28 11:30:00', '2022-09-03 16:45:00', 1, 3, 1),
+	(3, 'Brilliant King', 'Find and kill the leader of the Chinese mafia. Discretion and carefulness advised.', 'Copper Blue Alligator', 'China', '2022-04-05 06:00:00', '2022-04-25 06:00:00', 8, 1, 3),
+	(4, 'Rain of the Lion', 'Make a copy of the queen\'s jewels, rob the original ones and replace them with the copy.', 'Aluminium Red Chicken', 'Finland', '2022-06-12 19:45:00', '2022-09-12 23:00:00', 9, 7, 2),
+	(5, 'Last Roar', 'Infiltrate the consolate and put our target\'s folder in the criminal records.', 'Titanium Green Leopard', 'Brazil', '2022-09-30 01:00:00', '2022-11-15 15:45:00', 3, 2, 2),
+	(6, 'Ladies Glory', 'Get our target to spend his money on the new hospital charity.', 'Steel Turquoise Dog', 'Poland', '2022-12-25 00:00:00', '2022-12-26 00:00:00', 5, 7, 1),
+	(7, 'Sleeping Eagle', 'Kidnap our target in order to have him cancel the fundraising for the creation of a nuclear power plant. Fight if necessary.', 'Lead Silver Shark', 'Indonesia', '2022-03-01 00:00:00', '2022-03-02 14:00:00', 7, 6, 4),
+	(8, 'Acid Rain', 'Harass and blackmail our target to convince him to tell his wife about his mistress.', 'Diamond Pink Dolphin', 'Thailand', '2022-05-30 15:45:00', '2022-08-31 17:15:00', 4, 8, 2),
+	(9, 'Nightfall', 'Trick our target in telling us about the location of the drug dealers HQs.', 'Bronze Aqua Iguana', 'Argentina', '2022-02-06 06:30:00', '2022-02-20 19:00:00', 10, 5, 4),
+	(10, 'Sky Guardian', 'Rob the plans of the new army\'s submarine out of our target\'s safe.', 'Brass Orange Cow', 'Malaysia', '2022-05-07 10:45:00', '2022-06-07 17:00:00', 6, 4, 3);
+/*!40000 ALTER TABLE `mission` ENABLE KEYS */;
+
+-- Listage de la structure de la table spy. mission_agent
+CREATE TABLE IF NOT EXISTS `mission_agent` (
+  `mission_id` int(11) NOT NULL,
+  `agent_id` int(11) NOT NULL,
+  PRIMARY KEY (`mission_id`,`agent_id`),
+  KEY `FK_agent_id_mission` (`agent_id`),
+  CONSTRAINT `FK_agent_id_mission` FOREIGN KEY (`agent_id`) REFERENCES `agent` (`id`),
+  CONSTRAINT `FK_mission_id_agent` FOREIGN KEY (`mission_id`) REFERENCES `mission` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Listage des données de la table spy.mission_agent : ~13 rows (environ)
+/*!40000 ALTER TABLE `mission_agent` DISABLE KEYS */;
+INSERT INTO `mission_agent` (`mission_id`, `agent_id`) VALUES
+	(3, 1),
+	(7, 1),
+	(2, 2),
+	(5, 2),
+	(8, 2),
+	(1, 3),
+	(6, 3),
+	(9, 3),
+	(10, 3),
+	(4, 4),
+	(5, 4),
+	(10, 4),
+	(4, 5);
+/*!40000 ALTER TABLE `mission_agent` ENABLE KEYS */;
+
+-- Listage de la structure de la table spy. mission_contact
+CREATE TABLE IF NOT EXISTS `mission_contact` (
+  `mission_id` int(11) NOT NULL,
+  `contact_id` int(11) NOT NULL,
+  PRIMARY KEY (`mission_id`,`contact_id`),
+  KEY `FK_contact_id` (`contact_id`),
+  CONSTRAINT `FK_contact_id` FOREIGN KEY (`contact_id`) REFERENCES `contact` (`id`),
+  CONSTRAINT `FK_mission_id_contact` FOREIGN KEY (`mission_id`) REFERENCES `mission` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Listage des données de la table spy.mission_contact : ~10 rows (environ)
+/*!40000 ALTER TABLE `mission_contact` DISABLE KEYS */;
+INSERT INTO `mission_contact` (`mission_id`, `contact_id`) VALUES
+	(7, 1),
+	(6, 2),
+	(8, 3),
+	(5, 4),
+	(2, 6),
+	(1, 8),
+	(10, 9),
+	(3, 10),
+	(9, 14),
+	(4, 15);
+/*!40000 ALTER TABLE `mission_contact` ENABLE KEYS */;
+
+-- Listage de la structure de la table spy. mission_status
+CREATE TABLE IF NOT EXISTS `mission_status` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `status` varchar(60) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+
+-- Listage des données de la table spy.mission_status : ~4 rows (environ)
+/*!40000 ALTER TABLE `mission_status` DISABLE KEYS */;
+INSERT INTO `mission_status` (`id`, `status`) VALUES
+	(1, 'To be started'),
+	(2, 'Ongoing'),
+	(3, 'Completed'),
+	(4, 'Failure');
+/*!40000 ALTER TABLE `mission_status` ENABLE KEYS */;
+
+-- Listage de la structure de la table spy. mission_type
+CREATE TABLE IF NOT EXISTS `mission_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(60) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+
+-- Listage des données de la table spy.mission_type : ~8 rows (environ)
+/*!40000 ALTER TABLE `mission_type` DISABLE KEYS */;
+INSERT INTO `mission_type` (`id`, `type`) VALUES
+	(1, 'Assassination'),
+	(2, 'Infiltration'),
+	(3, 'Hacking'),
+	(4, 'Robbery'),
+	(5, 'Information'),
+	(6, 'Kidnapping'),
+	(7, 'Extortion'),
+	(8, 'Intimidation');
+/*!40000 ALTER TABLE `mission_type` ENABLE KEYS */;
+
+-- Listage de la structure de la table spy. nationality
+CREATE TABLE IF NOT EXISTS `nationality` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `country` varchar(60) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
+
+-- Listage des données de la table spy.nationality : ~15 rows (environ)
+/*!40000 ALTER TABLE `nationality` DISABLE KEYS */;
+INSERT INTO `nationality` (`id`, `country`) VALUES
+	(1, 'Indonesia'),
+	(2, 'Poland'),
+	(3, 'Thailand'),
+	(4, 'Brazil'),
+	(5, 'Sweden'),
+	(6, 'Haiti'),
+	(7, 'Vietnam'),
+	(8, 'Morocco'),
+	(9, 'Malaysia'),
+	(10, 'China'),
+	(11, 'Colombia'),
+	(12, 'Uzbekistan'),
+	(13, 'Philippines'),
+	(14, 'Argentina'),
+	(15, 'Finland');
+/*!40000 ALTER TABLE `nationality` ENABLE KEYS */;
+
+-- Listage de la structure de la table spy. skill
+CREATE TABLE IF NOT EXISTS `skill` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(60) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+
+-- Listage des données de la table spy.skill : ~10 rows (environ)
+/*!40000 ALTER TABLE `skill` DISABLE KEYS */;
+INSERT INTO `skill` (`id`, `name`) VALUES
+	(1, 'IT'),
+	(2, 'Social'),
+	(3, 'Infiltration'),
+	(4, 'Games'),
+	(5, 'Polylanguage'),
+	(6, 'Robbery'),
+	(7, 'Fighting'),
+	(8, 'Weapons'),
+	(9, 'Chemistry'),
+	(10, 'Deception');
+/*!40000 ALTER TABLE `skill` ENABLE KEYS */;
+
+-- Listage de la structure de la table spy. target
+CREATE TABLE IF NOT EXISTS `target` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `last_name` varchar(60) NOT NULL,
+  `first_name` varchar(60) NOT NULL,
+  `birth_date` date NOT NULL,
+  `code_name` varchar(60) NOT NULL,
+  `nationality_id` int(11) NOT NULL,
+  `mission_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_nationality_id_target` (`nationality_id`),
+  KEY `FK_mission_id_target` (`mission_id`),
+  CONSTRAINT `FK_mission_id_target` FOREIGN KEY (`mission_id`) REFERENCES `mission` (`id`),
+  CONSTRAINT `FK_nationality_id_target` FOREIGN KEY (`nationality_id`) REFERENCES `nationality` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
+
+-- Listage des données de la table spy.target : ~10 rows (environ)
+/*!40000 ALTER TABLE `target` DISABLE KEYS */;
+INSERT INTO `target` (`id`, `last_name`, `first_name`, `birth_date`, `code_name`, `nationality_id`, `mission_id`) VALUES
+	(1, 'Kilius', 'Doyle', '1989-03-01', 'Alopex Lagopus', 8, 1),
+	(2, 'Harbison', 'Misha', '1959-04-18', 'Acanthaster planci', 13, 2),
+	(3, 'Domeny', 'Olympie', '1986-01-14', 'Macaca nemestrina', 10, 3),
+	(4, 'Purves', 'Lilith', '1953-04-23', 'Pterocles gutturalis', 15, 4),
+	(5, 'Rumming', 'Letisha', '1980-05-06', 'Platalea leucordia', 3, 5),
+	(6, 'Reaveley', 'Fredericka', '1965-03-21', 'Tayassu pecari', 5, 6),
+	(7, 'Milmo', 'Daile', '1954-07-01', 'Ratufa indica', 12, 7),
+	(8, 'Winspurr', 'Conrado', '1970-12-18', 'Pteronura brasiliensis', 3, 8),
+	(9, 'Bazley', 'Hannah', '1960-12-02', 'Geochelone radiata', 4, 9),
+	(10, 'Farress', 'Marj', '1967-01-24', 'Trichoglossus chlorolepidotus', 11, 10);
+/*!40000 ALTER TABLE `target` ENABLE KEYS */;
+
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
