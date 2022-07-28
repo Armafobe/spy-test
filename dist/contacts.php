@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="fr">
-<?php session_start() ?>
+<?php session_start();
+//Get Heroku ClearDB connection information
+$cleardb_url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+$cleardb_server = $cleardb_url["host"];
+$cleardb_username = $cleardb_url["user"];
+$cleardb_password = $cleardb_url["pass"];
+$cleardb_db = substr($cleardb_url["path"], 1);
+$active_group = 'default';
+$query_builder = TRUE;
+// Connect to DB
+$conn = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
+?>
 
 <head>
   <meta charset="UTF-8">
@@ -13,7 +24,7 @@
 
 <body>
   <nav class="flex justify-center mt-8 space-x-4">
-    <a href="missions.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Missions</a>
+    <a href="index.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Missions</a>
     <a href="agents.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Agents</a>
     <a href="targets.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Targets</a>
     <a href="contacts.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Contacts</a>
@@ -90,8 +101,7 @@
   </div>
   <div class="block text-center py-8">
     <?php
-    $pdo = new PDO('mysql:host=localhost;dbname=spy', 'root', '');
-    foreach ($pdo->query('SELECT * FROM contact') as $contact) {
+    foreach ($conn->query('SELECT * FROM contact') as $contact) {
       echo '<div class="mx-auto w-1/2 rounded-lg bg-gray-100/50 p-6 m-4">';
       echo $contact['last_name'] . '<br>';
       echo '<p class="overline text-sm text-slate-500">';
