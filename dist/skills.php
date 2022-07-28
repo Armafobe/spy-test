@@ -8,6 +8,7 @@ $cleardb_password = $cleardb_url["pass"];
 $cleardb_db = substr($cleardb_url["path"], 1);
 $active_group = 'default';
 $query_builder = TRUE;
+$pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
 ?>
 
 <head>
@@ -71,7 +72,6 @@ $query_builder = TRUE;
   </div>
   <div class="block text-center py-8">
     <?php
-    $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
     foreach (mysqli_query($pdo, ('SELECT * FROM skill')) as $skill) {
       echo '<div class="mx-auto w-1/2 rounded-lg bg-gray-100/50 p-6 m-4">';
       echo $skill['name'] . '<br>';
