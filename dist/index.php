@@ -8,7 +8,6 @@ $cleardb_password = $cleardb_url["pass"];
 $cleardb_db = substr($cleardb_url["path"], 1);
 $active_group = 'default';
 $query_builder = TRUE;
-$pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
 ?>
 
 <head>
@@ -206,6 +205,7 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
   </div>
   <div class="block relative text-center py-8">
     <?php
+    $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
     if (isset($_GET['search']) && !empty(trim($_GET['keywords']))) {
       $words = preg_split("/[\s,]+/", $_GET['keywords']);
       switch ($_GET['searchOption']) {
@@ -271,7 +271,7 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
     }
 
 
-    foreach ($pdo->query($sql) as $mission) {
+    foreach (mysqli_query($pdo, $sql) as $mission) {
       echo '<div class="mx-auto w-3/4 md:w-1/2 rounded-lg bg-gray-100/50 p-6 m-4">';
       echo $mission['title'] . '<br>';
       echo '<p class="overline text-sm text-slate-500">';
