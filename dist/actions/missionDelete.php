@@ -9,7 +9,7 @@ try {
   $pdo->exec($sql);
   $pdo->exec($sql2);
   $pdo->exec($sql3);
-  header('Location: ../missions.php');
+  header('Location: ../index.php');
 } catch (PDOException $e) {
   echo $sql . '<br>' . $e->getMessage();
 }
