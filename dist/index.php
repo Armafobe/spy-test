@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
 <?php session_start();
-//Get Heroku ClearDB connection information
-$cleardb_url = parse_url(getenv("mysql://ba008afa4d9a14:48bc42f5@us-cdbr-east-06.cleardb.net/heroku_3c2b29750d62481?reconnect=true"));
-$cleardb_server = $cleardb_url["us-cdbr-east-06.cleardb.net"];
-$cleardb_username = $cleardb_url["ba008afa4d9a14"];
-$cleardb_password = $cleardb_url["48bc42f5"];
-$cleardb_db = substr($cleardb_url["heroku_3c2b29750d62481"], 1);
+$cleardb_url = parse_url("mysql://ba008afa4d9a14:48bc42f5@us-cdbr-east-06.cleardb.net/heroku_3c2b29750d62481?reconnect=true");
+$cleardb_server = $cleardb_url["host"];
+$cleardb_username = $cleardb_url["user"];
+$cleardb_password = $cleardb_url["pass"];
+$cleardb_db = substr($cleardb_url["path"], 1);
 $active_group = 'default';
 $query_builder = TRUE;
-// Connect to DB
 $conn = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
 ?>
 
@@ -210,7 +208,6 @@ $conn = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $c
   </div>
   <div class="block relative text-center py-8">
     <?php
-    $conn = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
     if (isset($_GET['search']) && !empty(trim($_GET['keywords']))) {
       $words = preg_split("/[\s,]+/", $_GET['keywords']);
       switch ($_GET['searchOption']) {

@@ -3,10 +3,10 @@
 session_start();
 if (isset($_POST['email']) && isset($_POST['password'])) {
 
-  $db_username = 'root';
-  $db_password = '';
-  $db_name = 'spy';
-  $db_host = 'localhost';
+  $db_username = 'ba008afa4d9a14';
+  $db_password = '48bc42f5';
+  $db_name = 'heroku_3c2b29750d62481';
+  $db_host = 'us-cdbr-east-06.cleardb.net';
   $db = mysqli_connect($db_host, $db_username, $db_password, $db_name) or die('pas de connexion!');
 
   //mysql_real_escape_string, htmlspecialchars contrer attaque sql xss
@@ -20,7 +20,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
     $count = $reponse['count(*)'];
     if ($count != 0) {
       $_SESSION['email'] = $email;
-      header('Location: ../missions.php');
+      header('Location: ../index.php');
     } else {
       header('Location : ../login.php?erreur=1');
     }
