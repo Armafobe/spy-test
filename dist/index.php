@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <?php session_start();
-$cleardb_url = parse_url("mysql://ba008afa4d9a14:48bc42f5@us-cdbr-east-06.cleardb.net/heroku_3c2b29750d62481?reconnect=true");
+$cleardb_url = parse_url(getenv("CLEARDB_DATABE_URL"));
 $cleardb_server = $cleardb_url["host"];
 $cleardb_username = $cleardb_url["user"];
 $cleardb_password = $cleardb_url["pass"];
