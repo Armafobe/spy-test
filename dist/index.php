@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <?php session_start();
-$cleardb_url = parse_url(getenv("CLEARDB_DATABE_URL"));
+$cleardb_url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 $cleardb_server = $cleardb_url["host"];
 $cleardb_username = $cleardb_url["user"];
 $cleardb_password = $cleardb_url["pass"];
