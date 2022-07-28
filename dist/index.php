@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <?php session_start();
-$cleardb_url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+$cleardb_url = parse_url(getenv("DATABASE_URL"));
 $cleardb_server = $cleardb_url["host"];
 $cleardb_username = $cleardb_url["user"];
 $cleardb_password = $cleardb_url["pass"];
@@ -225,32 +225,32 @@ $query_builder = TRUE;
           $sql = "SELECT * FROM mission WHERE end_date LIKE '%$words[0]%'";
           break;
         case 'skill':
-          foreach ($pdo->query("SELECT * FROM skill WHERE name = '$_GET[keywords]'") as $skill) {
-            foreach ($pdo->query("SELECT * FROM mission WHERE skill_id = '$skill[id]'") as $mission) {
+          foreach (mysqli_query($pdo, "SELECT * FROM skill WHERE name = '$_GET[keywords]'") as $skill) {
+            foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE skill_id = '$skill[id]'") as $mission) {
               $sql = "SELECT * FROM mission WHERE skill_id = '$mission[skill_id]'";
             }
           };
           break;
         case 'mission_type':
-          foreach ($pdo->query("SELECT * FROM mission_type WHERE type = '$_GET[keywords]'") as $type) {
-            foreach ($pdo->query("SELECT * FROM mission WHERE mission_type_id = '$type[id]'") as $mission) {
+          foreach (mysqli_query($pdo, "SELECT * FROM mission_type WHERE type = '$_GET[keywords]'") as $type) {
+            foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE mission_type_id = '$type[id]'") as $mission) {
               $sql = "SELECT * FROM mission WHERE mission_type_id = '$mission[mission_type_id]'";
             }
           };
           break;
         case 'mission_status':
-          foreach ($pdo->query("SELECT * FROM mission_status WHERE status = '$_GET[keywords]'") as $status) {
-            foreach ($pdo->query("SELECT * FROM mission WHERE mission_status_id = '$status[id]'") as $mission) {
+          foreach (mysqli_query($pdo, "SELECT * FROM mission_status WHERE status = '$_GET[keywords]'") as $status) {
+            foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE mission_status_id = '$status[id]'") as $mission) {
               $sql = "SELECT * FROM mission WHERE mission_status_id = '$mission[mission_status_id]'";
             }
           };
           break;
         case 'agent':
-          foreach ($pdo->query("SELECT * FROM agent WHERE last_name = '$_GET[keywords]'") as $agent) {
-            foreach ($pdo->query("SELECT * FROM mission_agent WHERE agent_id = '$agent[id]'") as $mission) {
+          foreach (mysqli_query($pdo, "SELECT * FROM agent WHERE last_name = '$_GET[keywords]'") as $agent) {
+            foreach (mysqli_query($pdo, "SELECT * FROM mission_agent WHERE agent_id = '$agent[id]'") as $mission) {
               $sql = "SELECT * FROM mission WHERE id = '$mission[mission_id]'";
               if ("SELECT COUNT($mission[mission_id]) > 1") {
-                foreach ($pdo->query("SELECT * FROM mission_agent WHERE agent_id = '$agent[id]'") as $count) {
+                foreach (mysqli_query($pdo, "SELECT * FROM mission_agent WHERE agent_id = '$agent[id]'") as $count) {
                   $sql .= " OR id = $count[mission_id]";
                 }
               } else {
@@ -260,8 +260,8 @@ $query_builder = TRUE;
           };
           break;
         case 'contact':
-          foreach ($pdo->query("SELECT * FROM contact WHERE last_name = '$_GET[keywords]'") as $contact) {
-            foreach ($pdo->query("SELECT * FROM mission_contact WHERE mission_id = '$contact[id]'") as $mission) {
+          foreach (mysqli_query($pdo, "SELECT * FROM contact WHERE last_name = '$_GET[keywords]'") as $contact) {
+            foreach (mysqli_query($pdo, "SELECT * FROM mission_contact WHERE mission_id = '$contact[id]'") as $mission) {
               $sql = "SELECT * FROM mission WHERE id = '$mission[mission_id]'";
             }
           };
