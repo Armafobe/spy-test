@@ -1,14 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
-<?php session_start();
-$cleardb_url = parse_url(getenv("CLEARDB_DATABASE_URL"));
-$cleardb_server = $cleardb_url["host"];
-$cleardb_username = $cleardb_url["user"];
-$cleardb_password = $cleardb_url["pass"];
-$cleardb_db = substr($cleardb_url["path"], 1);
-$active_group = 'default';
-$query_builder = TRUE;
-?>
+<?php session_start(); ?>
 
 <head>
   <meta charset="UTF-8">
@@ -205,6 +197,13 @@ $query_builder = TRUE;
   </div>
   <div class="block relative text-center py-8">
     <?php
+    $cleardb_url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+    $cleardb_server = $cleardb_url["host"];
+    $cleardb_username = $cleardb_url["user"];
+    $cleardb_password = $cleardb_url["pass"];
+    $cleardb_db = substr($cleardb_url["path"], 1);
+    $active_group = 'default';
+    $query_builder = TRUE;
     $conn = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
     if (isset($_GET['search']) && !empty(trim($_GET['keywords']))) {
       $words = preg_split("/[\s,]+/", $_GET['keywords']);
