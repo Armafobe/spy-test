@@ -1,4 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 * {
   box-sizing: border-box;
 }
@@ -26,7 +29,7 @@ a:after {
   left: 0%;
   width: 0;
   height: 2px;
-  background: #ea580c;
+  background: #EA580C;
   display: block;
   content: "";
   transition: width 0.5s ease-in-out;
@@ -36,4 +39,4 @@ a:hover:after {
   width: 100%;
 }
 
-/*# sourceMappingURL=styles.css.map */ /*# sourceMappingURL=styles.css.map */
+/*# sourceMappingURL=styles.css.map *//*# sourceMappingURL=styles.css.map */
