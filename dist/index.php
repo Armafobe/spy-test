@@ -15,7 +15,8 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./output.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+
   <link rel="stylesheet" href="../css/styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>Missions</title>
@@ -42,13 +43,13 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
     ?>
   </nav>
 
-  <form method="GET" action="#" class="mx-auto my-6 sm:w-3/4">
-    <div class="grid grid-rows-2 grid-cols-5 gap-3 sm:grid-rows-1 sm:grid-cols-3 justify-items-center">
-      <div class="row-start-1 col-start-1 col-span-5 sm:col-span-3 self-center">
+  <form method="GET" action="#" class="mx-auto my-6 sm:w-2/3 md:w-1/2">
+    <div class="grid grid-rows-2 grid-cols-3 sm:grid-cols-4 gap-3 md:grid-cols-5 md:gap-2 sm:grid-rows-1 justify-items-center md:justify-items-stretch">
+      <div class="row-start-1 col-start-1 col-span-3 md:col-start-1 md:col-span-3 sm:col-span-2 self-center">
         <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">Search</label>
         <input type="search" name="keywords" placeholder="Search" id="default-search" class="block w-full p-4 pl-10 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Mockups, Logos..." required="">
       </div>
-      <div class="row-start-2 col-span-3 sm:row-start-1 sm:col-start-4 sm:col-span-1 justify-self-center self-center">
+      <div class="row-start-2 col-start-1 col-span-2 sm:row-start-1 sm:col-start-3 sm:col-span-1 md:col-start-4 md:col-span-1 justify-self-center self-center">
         In
         <select class="rounded w-5/6 border-none" name="searchOption">
           <option value="title">Title</option>
@@ -63,7 +64,7 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
           <option value="contact">Contact</option>
         </select>
       </div>
-      <div class="row-start-2 col-span-2 sm:row-start-1 sm:col-start-5 sm:col-span-1 self-center mx-4">
+      <div class="row-start-2 col-start-2 col-span-2 sm:row-start-1 sm:col-start-4 sm:col-span-1 md:col-start-5 md:col-span-1 self-center mx-4">
         <button type="submit" name="search" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
       </div>
     </div>
