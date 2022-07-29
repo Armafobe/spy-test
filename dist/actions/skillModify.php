@@ -76,7 +76,13 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
 <?php
 
 try {
-  $sql = "UPDATE skill SET name = '$_POST[skill]' WHERE id = '$_GET[modify]'";
+  if (!isset($_POST['skill'])) {
+    foreach (mysqli_query($pdo, "SELECT * FROM skill WHERE id = '$_GET[modify]'") as $skill) {
+      $sql = "UPDATE skill SET name = $skill[name] WHERE id = '$_GET[modify]'";
+    }
+  } else {
+    $sql = "UPDATE skill SET name = '$_POST[skill]' WHERE id = '$_GET[modify]'";
+  }
   mysqli_query($pdo, $sql);
 } catch (PDOException $e) {
   echo $sql . '<br>' . $e->getMessage();
