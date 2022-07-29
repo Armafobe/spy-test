@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <?php session_start();
-$cleardb_url = parse_url(getenv("DATABASE_URL"));
+$cleardb_url = parse_url("mysql://ba008afa4d9a14:48bc42f5@us-cdbr-east-06.cleardb.net/heroku_3c2b29750d62481?reconnect=true");
 $cleardb_server = $cleardb_url["host"];
 $cleardb_username = $cleardb_url["user"];
 $cleardb_password = $cleardb_url["pass"];
@@ -22,7 +22,7 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
 </head>
 
 <body>
-  <nav class="flex flex-wrap justify-around mx-auto w-full sm:w-1/2 mt-8 space-x-4">
+  <nav class="flex flex-wrap justify-around w-full mt-8">
     <a href="index.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Missions</a>
     <a href="agents.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Agents</a>
     <a href="targets.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Targets</a>
@@ -42,9 +42,9 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
     ?>
   </nav>
 
-  <form method="GET" action="#" class="mx-auto my-6 ms-4 sm:ml-4 sm:w-3/4">
-    <div class="grid grid-rows-2 grid-cols-5 gap-3 sm:grid-rows-1 justify-items-center">
-      <div class="col-start-1 col-span-5 sm:col-start-1 sm:col-span-3">
+  <form method="GET" action="#" class="mx-auto my-6 sm:w-3/4">
+    <div class="grid grid-rows-2 grid-cols-5 gap-3 sm:grid-rows-1 sm:grid-cols-3 justify-items-center">
+      <div class="row-start-1 col-start-1 col-span-5 sm:col-span-3 self-center">
         <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">Search</label>
         <input type="search" name="keywords" placeholder="Search" id="default-search" class="block w-full p-4 pl-10 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Mockups, Logos..." required="">
       </div>

@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
 <?php
-$cleardb_url = parse_url(getenv("DATABASE_URL"));
+$cleardb_url = parse_url("mysql://ba008afa4d9a14:48bc42f5@us-cdbr-east-06.cleardb.net/heroku_3c2b29750d62481?reconnect=true");
 $cleardb_server = $cleardb_url["host"];
 $cleardb_username = $cleardb_url["user"];
 $cleardb_password = $cleardb_url["pass"];
 $cleardb_db = substr($cleardb_url["path"], 1);
 $active_group = 'default';
 $query_builder = TRUE;
-$pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
 ?>
 
 <head>
@@ -21,8 +20,8 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
 </head>
 
 <body>
-  <nav class="flex flex-wrap justify-around mx-auto w-full sm:w-1/2 mt-8 space-x-4">
-    <a href="../index.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Missions</a>
+  <nav class="flex flex-wrap justify-around w-full mt-8">
+    <a href=" ../index.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Missions</a>
     <a href="../agents.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Agents</a>
     <a href="../targets.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Targets</a>
     <a href="../contacts.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Contacts</a>
@@ -42,30 +41,30 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
   </nav>
 
   <div class="flex h-full">
-    <div class="block text-center rounded-lg bg-slate-700 py-8 p-4 sm:w-1/2 md:w-1/3 m-auto">
+    <div class="block text-center rounded-lg bg-slate-500 w-3/4 md:w-1/2 m-auto">
       <?php
-
+      $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
       foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE id = '$_GET[info]'") as $mission) {
-        echo '<div class="mx-auto w-3/4 rounded-lg text-white bg-gray-100/50 p-6 m-4">';
-        echo '<p class="text-slate-700">Code</p>';
-        echo '<p class="overline text-sm ">';
+        echo '<div class="mx-auto rounded-lg text-white p-4">';
+        echo '<p class="">Code</p>';
+        echo '<p class="overline text-sm opacity-75">';
         echo $mission['title'] . '<br>' . '<br>';
-        echo '<p class="text-slate-700">Address</p>';
-        echo '<p class="overline text-sm">';
+        echo '<p class="">Description</p>';
+        echo '<p class="overline text-sm  text-slate-500">';
         echo $mission['description'] . '<br>' . '<br>';
         echo '</p>';
-        echo '<p class="text-slate-700">Code Name</p>';
-        echo '<p class="overline text-sm">';
+        echo '<p class="">Code Name</p>';
+        echo '<p class="overline text-sm text-slate-500">';
         echo $mission['code_name'] . '<br>' . '<br>';
         echo '</p>';
-        echo '<p class="text-slate-700">Country</p>';
-        echo '<p class="overline text-sm">';
+        echo '<p class="">Country</p>';
+        echo '<p class="overline text-sm text-slate-500">';
         echo $mission['country'] . '<br>' . '<br>';
         echo '</p>';
-        echo '<p class="text-slate-700">Assigned Agent(s)</p>';
+        echo '<p class="">Assigned Agent(s)</p>';
         foreach (mysqli_query($pdo, "SELECT * FROM mission_agent WHERE mission_id = '$mission[id]'") as $ma) {
           foreach (mysqli_query($pdo, "SELECT * FROM agent WHERE id = '$ma[agent_id]'") as $agent) {
-            echo '<p class="overline text-sm">';
+            echo '<p class="overline text-sm text-slate-500">';
             echo $agent['last_name'] . '<br>';
             echo '</p>';
           }
