@@ -53,22 +53,38 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
                 <div class="grid grid-cols-6 gap-6">
                   <div class="lg:col-span-3 sm:col-span-6">
                     <label for="last_name" class="block text-sm font-medium text-gray-700">Last name</label>
-                    <input type="text" required name="last_name" id="last_name" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <input type="text" required <?php
+                                                foreach (mysqli_query($pdo, "SELECT * FROM agent WHERE id = '$_GET[modify]'") as $agent) {
+                                                  echo 'value="' . $agent['last_name'] . '" ';
+                                                }
+                                                ?> name="last_name" id="last_name" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                   </div>
 
                   <div class="lg:col-span-3 sm:col-span-6">
                     <label for="first_name" class="block text-sm font-medium text-gray-700">First name</label>
-                    <input type="text" required name="first_name" id="first_name" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <input type="text" required <?php
+                                                foreach (mysqli_query($pdo, "SELECT * FROM agent WHERE id = '$_GET[modify]'") as $agent) {
+                                                  echo 'value="' . $agent['first_name'] . '" ';
+                                                }
+                                                ?> name="first_name" id="first_name" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                   </div>
 
                   <div class="lg:col-span-3 sm:col-span-6">
                     <label for="birth_date" class="block text-sm font-medium text-gray-700">Birth Date</label>
-                    <input type="date" required name="birth_date" id="birth_date" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <input type="date" required <?php
+                                                foreach (mysqli_query($pdo, "SELECT * FROM agent WHERE id = '$_GET[modify]'") as $agent) {
+                                                  echo 'value="' . $agent['birth_date'] . '" ';
+                                                }
+                                                ?> name="birth_date" id="birth_date" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                   </div>
 
                   <div class="lg:col-span-3 sm:col-span-6">
                     <label for="code_id" class="block text-sm font-medium text-gray-700">Code ID</label>
-                    <input type="text" required name="code_id" id="code_id" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <input type="text" required <?php
+                                                foreach (mysqli_query($pdo, "SELECT * FROM agent WHERE id = '$_GET[modify]'") as $agent) {
+                                                  echo 'value="' . $agent['code_id'] . '" ';
+                                                }
+                                                ?> name="code_id" id="code_id" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                   </div>
 
                   <div class="lg:col-span-3 lg:col-start-1">
@@ -94,7 +110,7 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
                   </div>
                 </div>
 
-                <button type="submit" class="inline-flex justify-center mt-5 py-2 px-6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
+                <button type="submit" name="add" class="inline-flex justify-center mt-5 py-2 px-6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
               </div>
             </div>
           </form>
@@ -110,12 +126,22 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
 
 <?php
 try {
-  $sql = "UPDATE agent SET last_name = '$_POST[last_name]', first_name = '$_POST[first_name]', birth_date = '$_POST[birth_date]', code_id = '$_POST[code_id]', nationality_id = '$_POST[nationality]' WHERE id = '$_GET[modify]'";
-  foreach (mysqli_query($pdo, ("SELECT * from agent WHERE last_name = '$_POST[last_name]'")) as $agent) {
-    $sql2 = "UPDATE agent_skill SET skill_id = '$_POST[skill]' WHERE agent_id = '$agent[id]'";
+  if (!isset($_POST['add'])) {
+    foreach (mysqli_query($pdo, "SELECT * FROM agent WHERE id = '$_GET[modify]'") as $agent) {
+      $sql = "UPDATE agent SET last_name = $agent[last_name] WHERE id = '$_GET[modify]'";
+      $sql = "UPDATE agent SET first_name = $agent[first_name] WHERE id = '$_GET[modify]'";
+      $sql = "UPDATE agent SET birth_date = $agent[birth_date] WHERE id = '$_GET[modify]'";
+      $sql = "UPDATE agent SET code_id = $agent[code_id] WHERE id = '$_GET[modify]'";
+      $sql = "UPDATE agent SET nationality_id = $agent[nationality_id] WHERE id = '$_GET[modify]'";
+    }
+  } else {
+    $sql = "UPDATE agent SET last_name = '$_POST[last_name]', first_name = '$_POST[first_name]', birth_date = '$_POST[birth_date]', code_id = '$_POST[code_id]', nationality_id = '$_POST[nationality]' WHERE id = '$_GET[modify]'";
+    foreach (mysqli_query($pdo, ("SELECT * from agent WHERE last_name = '$_POST[last_name]'")) as $agent) {
+      $sql2 = "UPDATE agent_skill SET skill_id = '$_POST[skill]' WHERE agent_id = '$agent[id]'";
+    }
+    mysqli_query($pdo, $sql);
+    mysqli_query($pdo, $sql2);
   }
-  mysqli_query($pdo, $sql);
-  mysqli_query($pdo, $sql2);
 } catch (PDOException $e) {
   echo $sql . '<br>' . $e->getMessage();
 }

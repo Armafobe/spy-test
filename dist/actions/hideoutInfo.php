@@ -43,7 +43,7 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
 
 
   <div class="flex h-full">
-    <div class="block text-center rounded-lg bg-slate-400/50 w-3/4 md:w-1/2 m-auto">
+    <div class="block text-center rounded-lg bg-slate-400/50 w-3/4 md:w-1/3 m-auto">
       <?php
       foreach (mysqli_query($pdo, "SELECT * FROM hideout WHERE id = '$_GET[info]'") as $hideout) {
         echo '<div class="mx-auto w-1/2 rounded-lg p-4">';

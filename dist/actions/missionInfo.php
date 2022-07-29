@@ -41,7 +41,7 @@ $query_builder = TRUE;
   </nav>
 
   <div class="flex h-full">
-    <div class="block text-center rounded-lg bg-slate-400/50 w-3/4 md:w-1/2 m-auto">
+    <div class="block text-center rounded-lg bg-slate-400/50 w-3/4 md:w-1/3 m-auto">
       <?php
       $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
       foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE id = '$_GET[info]'") as $mission) {
