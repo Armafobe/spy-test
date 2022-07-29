@@ -79,7 +79,6 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
 try {
   $sql = "UPDATE skill SET name = '$_POST[skill]' WHERE id = '$_GET[modify]'";
   mysqli_query($pdo, $sql);
-  header('Location: ../skills.php');
 } catch (PDOException $e) {
   echo $sql . '<br>' . $e->getMessage();
 }
