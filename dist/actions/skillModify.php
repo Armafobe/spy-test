@@ -51,12 +51,11 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
                 <div class="grid grid-cols-3 auto-rows-max gap-4">
                   <div class="row-start-1 col-start-2">
                     <label for="skill" class="block text-sm font-medium text-gray-700">Name</label>
-                    <input type="text" required value="<?php
-                                                        $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
-                                                        foreach (mysqli_query($pdo, "SELECT * FROM skill WHERE id = '$_GET[modify]'") as $skill) {
-                                                          $skill['name'];
-                                                        }
-                                                        ?>" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" name="skill" id="skill">
+                    <input type="text" required <?php
+                                                foreach (mysqli_query($pdo, "SELECT * FROM skill WHERE id = '$_GET[modify]'") as $skill) {
+                                                  echo 'value="' . $skill['name'] . '" ';
+                                                }
+                                                ?>" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" name="skill" id="skill">
                   </div>
                   <div class="row-start-2 col-start-2">
                     <button type="submit" id="apply" class="inline-flex justify-center mt-5 py-2 px-6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Apply</button>
