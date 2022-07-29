@@ -128,14 +128,22 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
 try {
   if (!isset($_POST['add'])) {
     foreach (mysqli_query($pdo, "SELECT * FROM agent WHERE id = '$_GET[modify]'") as $agent) {
-      $sql = "UPDATE agent SET last_name = $agent[last_name] WHERE id = '$_GET[modify]'";
-      $sql = "UPDATE agent SET first_name = $agent[first_name] WHERE id = '$_GET[modify]'";
-      $sql = "UPDATE agent SET birth_date = $agent[birth_date] WHERE id = '$_GET[modify]'";
-      $sql = "UPDATE agent SET code_id = $agent[code_id] WHERE id = '$_GET[modify]'";
-      $sql = "UPDATE agent SET nationality_id = $agent[nationality_id] WHERE id = '$_GET[modify]'";
+      $sql = "UPDATE agent SET 
+      last_name = $agent[last_name],
+      first_name = $agent[first_name],
+      birth_date = $agent[birth_date],
+      code_id = $agent[code_id],
+      nationality_id = $agent[nationality_id]
+      WHERE id = '$_GET[modify]'";
     }
   } else {
-    $sql = "UPDATE agent SET last_name = '$_POST[last_name]', first_name = '$_POST[first_name]', birth_date = '$_POST[birth_date]', code_id = '$_POST[code_id]', nationality_id = '$_POST[nationality]' WHERE id = '$_GET[modify]'";
+    $sql = "UPDATE agent SET 
+    last_name = '$_POST[last_name]', 
+    first_name = '$_POST[first_name]', 
+    birth_date = '$_POST[birth_date]', 
+    code_id = '$_POST[code_id]', 
+    nationality_id = '$_POST[nationality]' 
+    WHERE id = '$_GET[modify]'";
     foreach (mysqli_query($pdo, ("SELECT * from agent WHERE last_name = '$_POST[last_name]'")) as $agent) {
       $sql2 = "UPDATE agent_skill SET skill_id = '$_POST[skill]' WHERE agent_id = '$agent[id]'";
     }
