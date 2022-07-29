@@ -15,7 +15,7 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="/dist/output.css" rel="stylesheet">
+  <link href="./output.css" rel="stylesheet">
   <link rel="stylesheet" href="../css/styles.css">
   <title>Agents</title>
 </head>
