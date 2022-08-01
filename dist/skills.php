@@ -73,7 +73,7 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
   <div class="block text-center py-8">
     <?php
     foreach (mysqli_query($pdo, ('SELECT * FROM skill')) as $skill) {
-      echo '<div class="mx-auto w-3/4 md:w-2/3 lg:w-1/2 rounded-lg bg-gray-100/50 p-6 m-4">';
+      echo '<div class="mx-auto w-3/4 md:w-2/3 lg:w-1/3 rounded-lg bg-gray-100/50 p-6 m-4">';
       echo $skill['name'] . '<br>';
       if (isset($_SESSION['email'])) {
         echo '<div class="flex flex-wrap space-x-2 justify-center">';
