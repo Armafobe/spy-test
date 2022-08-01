@@ -269,7 +269,7 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
       echo '<p class="overline text-sm text-slate-500">';
       echo $mission['description'];
       echo '<p>' . '<br>';
-      echo '<div class="flex flex-wrap space-x-4 justify-center">';
+      echo '<div class="flex flex-wrap space-x-2 justify-center">';
       echo '<form action="./actions/missionInfo.php" method="GET">';
       echo '<button type="submit" value="' . $mission['id'] . '" name="info" class="mt-2 p-2 w-32 rounded-lg hover:bg-cyan-700 bg-cyan-600">';
       echo 'More info';

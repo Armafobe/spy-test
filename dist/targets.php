@@ -111,12 +111,12 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
   <div class="block text-center py-8">
     <?php
     foreach (mysqli_query($pdo, ('SELECT * FROM target')) as $target) {
-      echo '<div class="mx-auto w-3/4 md:w-2/3 lg:w-1/2 rounded-lg bg-gray-100/50 p-6 m-4">';
+      echo '<div class="mx-auto w-3/4 md:w-2/3 lg:w-1/3 rounded-lg bg-gray-100/50 p-6 m-4">';
       echo $target['last_name'] . '<br>';
       echo '<p class="overline text-sm text-slate-500">';
       echo $target['code_name'];
       echo '</p>';
-      echo '<div class="flex flex-wrap space-x-4 justify-center">';
+      echo '<div class="flex flex-wrap space-x-2 justify-center">';
       echo '<form action="./actions/targetInfo.php">';
       echo '<button type="submit" value="' . $target['id'] . '" name="info" class="mt-2 p-2 w-32 rounded-lg hover:bg-cyan-700 bg-cyan-600">';
       echo 'More info';
