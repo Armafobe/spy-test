@@ -107,7 +107,7 @@ $query_builder = TRUE;
         foreach (mysqli_query($pdo, "SELECT * FROM mission_status WHERE id = '$mission[mission_status_id]'") as $ms) {
           echo '<p class="text-slate-700">Status</p>';
           echo '<p class="overline text-sm text-slate-500">';
-          echo $ms['status'] . '<br>' . '<br>';
+          echo $ms['status'] . '<br>';
           echo '</p>';
         }
       }

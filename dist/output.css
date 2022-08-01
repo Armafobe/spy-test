@@ -1014,10 +1014,6 @@ select{
   background-color: rgb(148 163 184 / 0.5);
 }
 
-.bg-slate-400\/75{
-  background-color: rgb(148 163 184 / 0.75);
-}
-
 .p-4{
   padding: 1rem;
 }

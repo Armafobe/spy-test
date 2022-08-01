@@ -70,7 +70,7 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
         foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE id = '$target[mission_id]'") as $m) {
           echo '<p class="text-slate-700">Mission</p>';
           echo '<p class="overline text-sm text-slate-500">';
-          echo $m['title'] . '<br>' . '<br>';
+          echo $m['title'] . '<br>';
           echo '</p>';
         }
       }

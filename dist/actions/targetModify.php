@@ -53,22 +53,38 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
                 <div class="grid grid-cols-6 gap-6">
                   <div class="col-span-6 sm:col-span-3">
                     <label for="last_name" class="block text-sm font-medium text-gray-700">Last Name</label>
-                    <input type="text" required name="last_name" id="last_name" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <input type="text" required <?php
+                                                foreach (mysqli_query($pdo, "SELECT * FROM target WHERE id = '$_GET[modify]'") as $target) {
+                                                  echo 'value="' . $target['last_name'] . '" ';
+                                                }
+                                                ?> name="last_name" id="last_name" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                   </div>
 
                   <div class="col-span-6 sm:col-span-3">
                     <label for="first_name" class="block text-sm font-medium text-gray-700">First Name</label>
-                    <input type="text" required name="first_name" id="first_name" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <input type="text" required <?php
+                                                foreach (mysqli_query($pdo, "SELECT * FROM target WHERE id = '$_GET[modify]'") as $target) {
+                                                  echo 'value="' . $target['first_name'] . '" ';
+                                                }
+                                                ?> name="first_name" id="first_name" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                   </div>
 
                   <div class="col-span-6 sm:col-span-3">
                     <label for="birth_date" class="block text-sm font-medium text-gray-700">Birth Date</label>
-                    <input type="date" required name="birth_date" id="birth_date" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <input type="date" required <?php
+                                                foreach (mysqli_query($pdo, "SELECT * FROM target WHERE id = '$_GET[modify]'") as $target) {
+                                                  echo 'value="' . $target['birth_date'] . '" ';
+                                                }
+                                                ?> name="birth_date" id="birth_date" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                   </div>
 
                   <div class="col-span-6 sm:col-span-3">
                     <label for="code_name" class="block text-sm font-medium text-gray-700">Code Name</label>
-                    <input type="text" required name="code_name" id="code_name" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <input type="text" required <?php
+                                                foreach (mysqli_query($pdo, "SELECT * FROM target WHERE id = '$_GET[modify]'") as $target) {
+                                                  echo 'value="' . $target['code_name'] . '" ';
+                                                }
+                                                ?> name="code_name" id="code_name" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                   </div>
 
                   <div class="col-span-6 sm:col-span-3">
@@ -109,7 +125,19 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
 
 <?php
 try {
-  $sql = "UPDATE target SET 
+  if (!isset($_POST['add'])) {
+    foreach (mysqli_query($pdo, "SELECT * FROM target WHERE id = '$_GET[modify]'") as $target) {
+      $sql = "UPDATE target SET 
+      last_name = $target[last_name],
+      first_name = $target[first_name],
+      birth_date = $target[birth_date],
+      code_name = $target[code_name],
+      nationality_id = $target[nationality_id],
+      mission_id = $target[mission_id]
+      WHERE id = '$_GET[modify]'";
+    }
+  } else {
+    $sql = "UPDATE target SET 
   last_name = '$_POST[last_name]', 
   first_name = '$_POST[first_name]', 
   birth_date = '$_POST[birth_date]', 
@@ -117,12 +145,13 @@ try {
   nationality_id = '$_POST[nationality]', 
   mission_id = '$_POST[mission]' 
   WHERE id = '$_GET[modify]'";
-  foreach (mysqli_query($pdo, "SELECT * FROM mission_agent WHERE mission_id = '$_POST[mission]'") as $ma) {
-    foreach (mysqli_query($pdo, "SELECT * FROM agent WHERE id = '$ma[agent_id]'") as $agent) {
-      if ($_POST['nationality'] == $agent['nationality_id']) {
-        break;
-      } else {
-        mysqli_query($pdo, $sql);
+    foreach (mysqli_query($pdo, "SELECT * FROM mission_agent WHERE mission_id = '$_POST[mission]'") as $ma) {
+      foreach (mysqli_query($pdo, "SELECT * FROM agent WHERE id = '$ma[agent_id]'") as $agent) {
+        if ($_POST['nationality'] == $agent['nationality_id']) {
+          break;
+        } else {
+          mysqli_query($pdo, $sql);
+        }
       }
     }
   }

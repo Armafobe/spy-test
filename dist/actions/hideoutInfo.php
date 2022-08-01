@@ -67,7 +67,7 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
         foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE id = '$hideout[mission_id]'") as $mission) {
           echo '<p class="text-slate-700">Mission</p>';
           echo '<p class="overline text-sm text-slate-500">';
-          echo $mission['title'] . '<br>' . '<br>';
+          echo $mission['title'] . '<br>';
           echo '</p>';
         }
       }

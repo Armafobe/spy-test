@@ -64,7 +64,7 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
         foreach (mysqli_query($pdo, ("SELECT * FROM nationality WHERE id = '$contact[nationality_id]'")) as $n) {
           echo '<p class="text-slate-700">Nationality</p>';
           echo '<p class="overline text-sm text-slate-500">';
-          echo $n['country'] . '<br>' . '<br>';
+          echo $n['country'] . '<br>';
           echo '</p>';
         }
       }

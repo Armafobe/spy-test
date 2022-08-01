@@ -53,22 +53,38 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
                 <div class="grid grid-cols-6 gap-6">
                   <div class="col-span-6 sm:col-span-3">
                     <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
-                    <input type="text" name="title" id="title" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <input type="text" required <?php
+                                                foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE id = '$_GET[modify]'") as $mission) {
+                                                  echo 'value="' . $mission['title'] . '" ';
+                                                }
+                                                ?> name="title" id="title" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                   </div>
 
                   <div class="col-span-6 sm:col-span-3">
                     <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
-                    <textarea name="description" id="description" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"></textarea>
+                    <textarea required <?php
+                                        foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE id = '$_GET[modify]'") as $mission) {
+                                          echo 'value="' . $mission['description'] . '" ';
+                                        }
+                                        ?> name="description" id="description" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"></textarea>
                   </div>
 
                   <div class="col-span-6 sm:col-span-3">
                     <label for="code_name" class="block text-sm font-medium text-gray-700">Code Name</label>
-                    <input type="text" name="code_name" id="code_name" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <input type="text" required <?php
+                                                foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE id = '$_GET[modify]'") as $mission) {
+                                                  echo 'value="' . $mission['code_name'] . '" ';
+                                                }
+                                                ?> name="code_name" id="code_name" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                   </div>
 
                   <div class="col-span-6 sm:col-span-3">
                     <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
-                    <select required name="country" id="country" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <select required required <?php
+                                              foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE id = '$_GET[modify]'") as $mission) {
+                                                echo 'value="' . $mission['country'] . '" ';
+                                              }
+                                              ?> name="country" id="country" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                       <?php
                       foreach (mysqli_query($pdo, "SELECT * FROM country") as $c) {
                         echo '<option value="' . $c['name'] . '">' . $c['name'] . '</option>';
@@ -79,12 +95,20 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
 
                   <div class="col-span-6 sm:col-span-3">
                     <label for="start_date" class="block text-sm font-medium text-gray-700">Start Date</label>
-                    <input type="datetime-local" name="start_date" id="start_date" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <input type="datetime-local" required <?php
+                                                          foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE id = '$_GET[modify]'") as $mission) {
+                                                            echo 'value="' . $mission['start_date'] . '" ';
+                                                          }
+                                                          ?> name="start_date" id="start_date" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                   </div>
 
                   <div class="col-span-6 sm:col-span-3">
                     <label for="end_date" class="block text-sm font-medium text-gray-700">End Date</label>
-                    <input type="datetime-local" name="end_date" id="end_date" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <input type="datetime-local" required <?php
+                                                          foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE id = '$_GET[modify]'") as $mission) {
+                                                            echo 'value="' . $mission['end_date'] . '" ';
+                                                          }
+                                                          ?> name="end_date" id="end_date" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                   </div>
 
                   <div class="col-span-6 sm:col-span-3">
@@ -144,7 +168,7 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
 
                   <div class="col-span-6 sm:col-span-3">
                     <label for="agent_id_2" class=" block text-sm font-medium text-gray-700">(Optional) 2nd Agent</label>
-                    <select name="agent_id_2" id="agent_id_2" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <select required name="agent_id_2" id="agent_id_2" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                       <option value="">None</option>
                       <?php
                       foreach (mysqli_query($pdo, "SELECT * FROM agent") as $a) {
@@ -172,8 +196,22 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
 <?php
 
 try {
-  $reset = "ALTER TABLE mission auto_increment = 0;";
-  $sql = "UPDATE mission SET 
+  if (!isset($_POST['add'])) {
+    foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE id = '$_GET[modify]'") as $mission) {
+      $sql = "UPDATE mission SET 
+        title = $mission[title],
+        description = $mission[description],
+        code_name = $mission[code_name],
+        country = $mission[country],
+        end_date = $mission[end_date],
+        skill_id = $mission[skill_id],
+        mission_type_id = $mission[mission_type_id],
+        mission_status_id = $mission[mission_status_id];
+        WHERE id = '$_GET[modify]'";
+    }
+  } else {
+    $reset = "ALTER TABLE mission auto_increment = 0;";
+    $sql = "UPDATE mission SET 
   title = '$_POST[title]', 
   description = '$_POST[description]', 
   code_name = '$_POST[code_name]', 
@@ -184,38 +222,39 @@ try {
   mission_type_id = '$_POST[mission_type_id]',
   mission_status_id = '$_POST[mission_status_id]'
   WHERE id = '$_GET[modify]'";
-  foreach (mysqli_query($pdo, "SELECT * FROM country WHERE name = '$_POST[country]'") as $country) {
-    foreach (mysqli_query($pdo, "SELECT * FROM contact WHERE id = '$_POST[contact_id]'") as $contact) {
-      if ($country['id'] != $contact['nationality_id']) {
-        header('Location: ../missions.php');
-        echo '<p>Selected country must have contact with same nationality</p>';
-      } else {
-        foreach (mysqli_query($pdo, "SELECT * FROM agent_skill WHERE agent_id = '$_POST[agent_id]' OR agent_id = '$_POST[agent_id_2]'") as $agent) {
-          if ($agent['skill_id'] != $_POST['skill']) {
-            header('Location: ../missions.php');
-            echo '<p>One of the two agents must have required skill</p>';
-          } else {
-            mysqli_query($pdo, $reset);
-            if ($_POST['agent_id_2'] == $_POST['agent_id']) {
-              header('Location: ../missions.php');
-              echo '<p></p>';
-            } else if (!$_POST['agent_id_2']) {
-              mysqli_query($pdo, $sql);
-              foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE title = '$_POST[title]'") as $m) {
-                mysqli_query($pdo, "UPDATE mission_agent SET mission_id = '$m[id]', agent_id = '$_POST[agent_id]'");
-              }
-            } else {
-              mysqli_query($pdo, $sql);
-              foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE title = '$_POST[title]'") as $m) {
-                mysqli_query($pdo, "DELETE FROM mission_agent WHERE mission_id = '$m[id]'");
-                mysqli_query($pdo, "INSERT INTO mission_agent (mission_id, agent_id) VALUES ('$m[id]', '$_POST[agent_id]'), ('$m[id]', '$_POST[agent_id_2]')");;
-              }
-            }
-          };
-          foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE title = '$_POST[title]'") as $m) {
-            mysqli_query($pdo, "UPDATE mission_contact SET contact_id = '$_POST[contact_id]' WHERE mission_id = '$m[id]'");
-          }
+    foreach (mysqli_query($pdo, "SELECT * FROM country WHERE name = '$_POST[country]'") as $country) {
+      foreach (mysqli_query($pdo, "SELECT * FROM contact WHERE id = '$_POST[contact_id]'") as $contact) {
+        if ($country['id'] != $contact['nationality_id']) {
           header('Location: ../missions.php');
+          echo '<p>Selected country must have contact with same nationality</p>';
+        } else {
+          foreach (mysqli_query($pdo, "SELECT * FROM agent_skill WHERE agent_id = '$_POST[agent_id]' OR agent_id = '$_POST[agent_id_2]'") as $agent) {
+            if ($agent['skill_id'] != $_POST['skill']) {
+              header('Location: ../missions.php');
+              echo '<p>One of the two agents must have required skill</p>';
+            } else {
+              mysqli_query($pdo, $reset);
+              if ($_POST['agent_id_2'] == $_POST['agent_id']) {
+                header('Location: ../missions.php');
+                echo '<p></p>';
+              } else if (!$_POST['agent_id_2']) {
+                mysqli_query($pdo, $sql);
+                foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE title = '$_POST[title]'") as $m) {
+                  mysqli_query($pdo, "UPDATE mission_agent SET mission_id = '$m[id]', agent_id = '$_POST[agent_id]'");
+                }
+              } else {
+                mysqli_query($pdo, $sql);
+                foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE title = '$_POST[title]'") as $m) {
+                  mysqli_query($pdo, "DELETE FROM mission_agent WHERE mission_id = '$m[id]'");
+                  mysqli_query($pdo, "INSERT INTO mission_agent (mission_id, agent_id) VALUES ('$m[id]', '$_POST[agent_id]'), ('$m[id]', '$_POST[agent_id_2]')");;
+                }
+              }
+            };
+            foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE title = '$_POST[title]'") as $m) {
+              mysqli_query($pdo, "UPDATE mission_contact SET contact_id = '$_POST[contact_id]' WHERE mission_id = '$m[id]'");
+            }
+            header('Location: ../missions.php');
+          }
         }
       }
     }

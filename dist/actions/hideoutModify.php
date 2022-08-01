@@ -53,27 +53,51 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
                 <div class="grid grid-cols-6 gap-6">
                   <div class="col-span-6 sm:col-span-3">
                     <label for="code" class="block text-sm font-medium text-gray-700">Code</label>
-                    <input type="text" name="code" id="code" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <input type="text" required <?php
+                                                foreach (mysqli_query($pdo, "SELECT * FROM hideout WHERE id = '$_GET[modify]'") as $hideout) {
+                                                  echo 'value="' . $hideout['code'] . '" ';
+                                                }
+                                                ?> name="code" id="code" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                   </div>
 
                   <div class="col-span-6 sm:col-span-3">
                     <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
-                    <input type="text" name="address" id="address" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <input type="text" required <?php
+                                                foreach (mysqli_query($pdo, "SELECT * FROM hideout WHERE id = '$_GET[modify]'") as $hideout) {
+                                                  echo 'value="' . $hideout['address'] . '" ';
+                                                }
+                                                ?> name="address" id="address" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                   </div>
 
                   <div class="col-span-6 sm:col-span-3">
                     <label for="type" class="block text-sm font-medium text-gray-700">Type</label>
-                    <input type="text" name="type" id="type" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <input type="text" required <?php
+                                                foreach (mysqli_query($pdo, "SELECT * FROM hideout WHERE id = '$_GET[modify]'") as $hideout) {
+                                                  echo 'value="' . $hideout['type'] . '" ';
+                                                }
+                                                ?> name="type" id="type" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                   </div>
 
                   <div class="col-span-6 sm:col-span-3">
-                    <label for="country_id" class="block text-sm font-medium text-gray-700">Country ID</label>
-                    <input type="number" name="country_id" id="country_id" min="1" max="15" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <label for="country_id" class="block text-sm font-medium text-gray-700">Country</label>
+                    <select required name="country_id" id="country_id" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                      <?php
+                      foreach (mysqli_query($pdo, ("SELECT * FROM country")) as $c) {
+                        echo '<option value="' . $c['id'] . '">' . $c['name'] . '</option>';
+                      }
+                      ?>
+                    </select>
                   </div>
 
                   <div class="col-span-6 sm:col-span-3">
-                    <label for="mission_id" class="block text-sm font-medium text-gray-700">Mission ID</label>
-                    <input type="number" name="mission_id" id="mission_id" min="1" max="10" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <label for="mission_id" class="block text-sm font-medium text-gray-700">Mission</label>
+                    <select required name="mission_id" id="mission_id" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                      <?php
+                      foreach (mysqli_query($pdo, ("SELECT * FROM mission")) as $m) {
+                        echo '<option value="' . $m['id'] . '">' . $m['title'] . '</option>';
+                      }
+                      ?>
+                    </select>
                   </div>
                 </div>
 
@@ -94,22 +118,34 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
 <?php
 
 try {
-  $sql = "UPDATE hideout SET 
-  code = '$_POST[code]', 
-  address = '$_POST[address]', 
-  type = '$_POST[type]', 
-  country_id = '$_POST[country_id]', 
-  mission_id = '$_POST[mission_id]' 
-  WHERE id = '$_GET[modify]'";
-  foreach (mysqli_query($pdo, "SELECT name FROM country WHERE id = '$_POST[country_id]'") as $c) {
-    foreach (mysqli_query($pdo, "SELECT country FROM mission WHERE id = '$_POST[mission_id]'") as $m) {
-      if (($c['name'] != $m['country'])) {
-        header('Location: ../hideouts.php');
-        echo 'Hideout must be located in mission country';
-      } else {
-        mysqli_query($pdo, $reset);
-        mysqli_query($pdo, $sql);
-        header('Location: ../hideouts.php');
+  if (!isset($_POST['add'])) {
+    foreach (mysqli_query($pdo, "SELECT * FROM hideout WHERE id = '$_GET[modify]'") as $hideout) {
+      $sql = "UPDATE hideout SET 
+        code = $hideout[code],
+        address = $hideout[address],
+        type = $hideout[type],
+        country_id = $hideout[country_id],
+        mission_id = $hideout[mission_id]
+        WHERE id = '$_GET[modify]'";
+    }
+  } else {
+    $sql = "UPDATE hideout SET 
+    code = '$_POST[code]', 
+    address = '$_POST[address]', 
+    type = '$_POST[type]', 
+    country_id = '$_POST[country_id]', 
+    mission_id = '$_POST[mission_id]' 
+    WHERE id = '$_GET[modify]'";
+    foreach (mysqli_query($pdo, "SELECT name FROM country WHERE id = '$_POST[country_id]'") as $c) {
+      foreach (mysqli_query($pdo, "SELECT country FROM mission WHERE id = '$_POST[mission_id]'") as $m) {
+        if (($c['name'] != $m['country'])) {
+          header('Location: ../hideouts.php');
+          echo 'Hideout must be located in mission country';
+        } else {
+          mysqli_query($pdo, $reset);
+          mysqli_query($pdo, $sql);
+          header('Location: ../hideouts.php');
+        }
       }
     }
   }

@@ -53,22 +53,38 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
                 <div class="grid grid-cols-6 gap-6">
                   <div class="col-span-6 sm:col-span-3">
                     <label for="last_name" class="block text-sm font-medium text-gray-700">Last name</label>
-                    <input type="text" name="last_name" id="last_name" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <input type="text" required <?php
+                                                foreach (mysqli_query($pdo, "SELECT * FROM contact WHERE id = '$_GET[modify]'") as $contact) {
+                                                  echo 'value="' . $contact['last_name'] . '" ';
+                                                }
+                                                ?> name="last_name" id="last_name" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                   </div>
 
                   <div class="col-span-6 sm:col-span-3">
                     <label for="first_name" class="block text-sm font-medium text-gray-700">First name</label>
-                    <input type="text" name="first_name" id="first_name" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <input type="text" required <?php
+                                                foreach (mysqli_query($pdo, "SELECT * FROM contact WHERE id = '$_GET[modify]'") as $contact) {
+                                                  echo 'value="' . $contact['first_name'] . '" ';
+                                                }
+                                                ?> name="first_name" id="first_name" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                   </div>
 
                   <div class="col-span-6 sm:col-span-3">
                     <label for="birth_date" class="block text-sm font-medium text-gray-700">Birth Date</label>
-                    <input type="date" name="birth_date" id="birth_date" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <input type="date" required <?php
+                                                foreach (mysqli_query($pdo, "SELECT * FROM contact WHERE id = '$_GET[modify]'") as $contact) {
+                                                  echo 'value="' . $contact['birth_date'] . '" ';
+                                                }
+                                                ?> name="birth_date" id="birth_date" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                   </div>
 
                   <div class="col-span-6 sm:col-span-3">
                     <label for="code_name" class="block text-sm font-medium text-gray-700">Code Name</label>
-                    <input type="text" name="code_name" id="code_name" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <input type="text" required <?php
+                                                foreach (mysqli_query($pdo, "SELECT * FROM contact WHERE id = '$_GET[modify]'") as $contact) {
+                                                  echo 'value="' . $contact['code_name'] . '" ';
+                                                }
+                                                ?> name="code_name" id="code_name" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                   </div>
 
                   <div class="col-span-6 sm:col-span-3">
@@ -76,7 +92,7 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
                     <select required name="nationality" id="nationality" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                       <?php
                       foreach (mysqli_query($pdo, ("SELECT * FROM nationality")) as $n) {
-                        echo '<option value="' . $n['id'] . '" style="font-family: Inter">' . $n['country'] . '</option>';
+                        echo '<option value="' . $n['id'] . '">' . $n['country'] . '</option>';
                       }
                       ?>
                     </select>
@@ -99,8 +115,20 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
 
 <?php
 try {
-  $sql = "UPDATE contact SET last_name = '$_POST[last_name]', first_name = '$_POST[first_name]', birth_date = '$_POST[birth_date]', code_name = '$_POST[code_name]', nationality_id = '$_POST[nationality]' WHERE id = '$_GET[modify]'";
-  mysqli_query($pdo, $sql);
+  if (!isset($_POST['add'])) {
+    foreach (mysqli_query($pdo, "SELECT * FROM contact WHERE id = '$_GET[modify]'") as $contact) {
+      $sql = "UPDATE contact SET 
+      last_name = $contact[last_name],
+      first_name = $contact[first_name],
+      birth_date = $contact[birth_date],
+      code_name = $contact[code_name],
+      nationality_id = $contact[nationality_id]
+      WHERE id = '$_GET[modify]'";
+    }
+  } else {
+    $sql = "UPDATE contact SET last_name = '$_POST[last_name]', first_name = '$_POST[first_name]', birth_date = '$_POST[birth_date]', code_name = '$_POST[code_name]', nationality_id = '$_POST[nationality]' WHERE id = '$_GET[modify]'";
+    mysqli_query($pdo, $sql);
+  }
 } catch (PDOException $e) {
   echo $sql . '<br>' . $e->getMessage();
 }
