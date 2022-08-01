@@ -264,7 +264,7 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
     }
 
     foreach (mysqli_query($pdo, ($sql)) as $mission) {
-      echo '<div class="mx-auto w-3/4 md:w-2/3 lg:w-1/3 rounded-lg bg-gray-100/50 p-6 m-4">';
+      echo '<div class="mx-auto w-3/4 md:w-2/3 lg:w-1/2 rounded-lg bg-gray-100/50 p-6 m-4">';
       echo $mission['title'] . '<br>';
       echo '<p class="overline text-sm text-slate-500">';
       echo $mission['description'];
