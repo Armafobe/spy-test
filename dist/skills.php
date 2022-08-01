@@ -42,11 +42,11 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
   </nav>
 
 
-  <div class="text-center rounded-lg bg-slate-700 text-white mt-4 p-4 sm:w-1/2 md:w-1/3 mx-auto" <?php
-                                                                                                  if (!isset($_SESSION['email'])) {
-                                                                                                    echo 'style="display: none;"';
-                                                                                                  }
-                                                                                                  ?>>
+  <div class="relative text-center rounded-lg bg-slate-700 text-white w-3/4 mt-4 p-4 lg:w-2/5 mx-auto" <?php
+                                                                                                        if (!isset($_SESSION['email'])) {
+                                                                                                          echo 'style="display: none;"';
+                                                                                                        }
+                                                                                                        ?>>
     <p class="mb-3 underline">Add entity</p>
     <div class="mt-10 sm:mt-0">
       <div class="md:grid md:grid-cols-1">
@@ -73,10 +73,10 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
   <div class="block text-center py-8">
     <?php
     foreach (mysqli_query($pdo, ('SELECT * FROM skill')) as $skill) {
-      echo '<div class="mx-auto w-1/2 rounded-lg bg-gray-100/50 p-6 m-4">';
+      echo '<div class="mx-auto w-3/4 md:w-2/3 lg:w-1/2 rounded-lg bg-gray-100/50 p-6 m-4">';
       echo $skill['name'] . '<br>';
       if (isset($_SESSION['email'])) {
-        echo '<div class="flex space-x-4 justify-center">';
+        echo '<div class="flex flex-wrap space-x-4 justify-center">';
         echo '<form action="./actions/skillModify.php" method="GET">';
         echo '<button type="submit" value="' . $skill['id'] . '" name="modify" class="mt-2 p-2 rounded-lg bg-green-600">';
         echo 'Modify entity';

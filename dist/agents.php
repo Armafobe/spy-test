@@ -43,11 +43,11 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
   </nav>
 
 
-  <div class="text-center rounded-lg bg-slate-700 text-white mt-4 p-4 sm:w-1/2 md:w-1/3 mx-auto" <?php
-                                                                                                  if (!isset($_SESSION['email'])) {
-                                                                                                    echo 'style="display: none;"';
-                                                                                                  }
-                                                                                                  ?>>
+  <div class="text-center rounded-lg bg-slate-700 text-white mt-4 p-4 w-3/4 md:w-2/3 lg:w-2/5 mx-auto" <?php
+                                                                                                        if (!isset($_SESSION['email'])) {
+                                                                                                          echo 'style="display: none;"';
+                                                                                                        }
+                                                                                                        ?>>
     <p class="mb-3 underline">Add entity</p>
     <div class="mt-10 sm:mt-0">
       <div class="md:grid md:grid-cols-1">
@@ -55,28 +55,28 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
           <form action="./actions/agentAdd.php" method="POST">
             <div class="shadow overflow-hidden sm:rounded-md">
               <div class="px-4 py-5 bg-white sm:p-6">
-                <div class="grid grid-cols-6 gap-6">
-                  <div class="lg:col-span-3 sm:col-span-6">
+                <div class="grid grid-cols-3 md:grid-cols-6 gap-6">
+                  <div class="md:col-span-3 col-span-6">
                     <label for="last_name" class="block text-sm font-medium text-gray-700">Last name</label>
                     <input type="text" required name="last_name" id="last_name" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                   </div>
 
-                  <div class="lg:col-span-3 sm:col-span-6">
+                  <div class="md:col-span-3 col-span-6">
                     <label for="first_name" class="block text-sm font-medium text-gray-700">First name</label>
                     <input type="text" required name="first_name" id="first_name" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                   </div>
 
-                  <div class="lg:col-span-3 sm:col-span-6">
+                  <div class="md:col-span-3 col-span-6">
                     <label for="birth_date" class="block text-sm font-medium text-gray-700">Birth Date</label>
                     <input type="date" required name="birth_date" id="birth_date" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                   </div>
 
-                  <div class="lg:col-span-3 sm:col-span-6">
+                  <div class="md:col-span-3 col-span-6">
                     <label for="code_id" class="block text-sm font-medium text-gray-700">Code ID</label>
                     <input type="text" required name="code_id" id="code_id" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                   </div>
 
-                  <div class="lg:col-span-3 lg:col-start-1">
+                  <div class="md:col-span-3 col-span-6 md:col-start-1">
                     <label for="nationality" class="block text-sm font-medium text-gray-700">Nationality</label>
                     <select required name="nationality" id="nationality" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                       <?php
@@ -87,7 +87,7 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
                     </select>
                   </div>
 
-                  <div class="lg:col-span-3 lg:col-start-4">
+                  <div class="md:col-span-3 col-span-6 md:col-start-4">
                     <label for="skill" class="block text-sm font-medium text-gray-700">Skill</label>
                     <select required name="skill" id="skill" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                       <?php
@@ -111,12 +111,12 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
   <div class="block text-center py-8">
     <?php
     foreach (mysqli_query($pdo, ('SELECT * FROM agent')) as $agent) {
-      echo '<div class="mx-auto w-1/2 rounded-lg bg-gray-100/50 p-6 m-4">';
+      echo '<div class="mx-auto w-3/4 md:w-2/3 lg:w-1/2 rounded-lg bg-gray-100/50 p-6 m-4">';
       echo $agent['last_name'] . '<br>';
       echo '<p class="overline text-sm text-slate-500">';
       echo $agent['code_id'];
       echo '</p>';
-      echo '<div class="flex space-x-4 justify-center">';
+      echo '<div class="flex flex-wrap space-x-4 justify-center">';
       echo '<form action="./actions/agentInfo.php" method="GET">';
       echo '<button type="submit" value="' . $agent['id'] . '" name="info" class="mt-2 p-2 w-32 rounded-lg hover:bg-cyan-700 bg-cyan-600">';
       echo 'More info';

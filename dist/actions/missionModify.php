@@ -42,7 +42,7 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
     ?>
   </nav>
 
-  <div class="text-center rounded-lg bg-slate-700 text-white mt-4 p-4 sm:w-1/2 md:w-1/3 mx-auto">
+  <div class="relative text-center rounded-lg bg-slate-700 text-white w-3/4 mt-4 p-4 lg:w-2/5 mx-auto">
     <p class="mb-3 underline">Modify entity</p>
     <div class="mt-10 sm:mt-0">
       <div class="md:grid md:grid-cols-1">

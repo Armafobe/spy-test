@@ -20,7 +20,7 @@
     <a href="hideouts.php" class="font-medium px-3 py-2 text-slate-700 rounded-lg hover:text-orange-600">Hideouts</a>
   </nav>
 
-  <div class="text-center rounded-lg bg-slate-700 text-white mt-4 p-4 sm:w-1/2 md:w-1/3 mx-auto">
+  <div class="relative text-center rounded-lg bg-slate-700 text-white w-3/4 mt-4 p-4 lg:w-2/5 mx-auto">
     <div class="mt-10 sm:mt-0">
       <div class="md:grid md:grid-cols-1">
         <div class="mt-5 md:mt-0">
