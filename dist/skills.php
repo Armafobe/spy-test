@@ -54,7 +54,7 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
         <div class="shadow overflow-hidden rounded sm:rounded-md">
           <div class="px-4 py-5 bg-white p-6">
             <div class="grid grid-cols-3 auto-rows-max gap-3">
-              <div class="row-start-1 justify-self-center col-span-3 md:col-span-1 md:col-start-2">
+              <div class="row-start-1 justify-self-center col-span-3 md:col-span-1">
                 <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
                 <input type="text" name="name" id="name" required class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
               </div>
