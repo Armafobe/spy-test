@@ -52,7 +52,13 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
     <div class="md:grid md:grid-cols-1">
       <form action="./actions/targetAdd.php" method="POST">
         <div class="shadow overflow-hidden rounded sm:rounded-md">
-          <div class="px-4 py-5 bg-white p-6">
+          <div class="rounded pt-0 bg-white p-6">
+            <div class="text-gray-700 my-4 p-2">
+              <p class="underline font-medium">Target won't be created if:</p>
+              <ul>
+                <li>Selected nationality is the same as one of the agents' nationality of selected mission</li>
+              </ul>
+            </div>
             <div class="grid grid-cols-6 gap-6">
               <div class="col-span-6 sm:col-span-3">
                 <label for="last_name" class="block text-sm font-medium text-gray-700">Last Name</label>

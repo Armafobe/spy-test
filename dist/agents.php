@@ -55,6 +55,7 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
       <form action="./actions/agentAdd.php" method="POST">
         <div class="shadow overflow-hidden rounded sm:rounded-md">
           <div class="px-4 py-5 bg-white p-6">
+
             <div class="grid grid-cols-3 md:grid-cols-6 gap-6">
               <div class="md:col-span-3 col-span-6">
                 <label for="last_name" class="block text-sm font-medium text-gray-700">Last name</label>

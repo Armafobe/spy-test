@@ -49,7 +49,13 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
 
       <form action="#" method="POST">
         <div class="shadow overflow-hidden rounded sm:rounded-md">
-          <div class="px-4 bg-white p-6">
+          <div class="rounded pt-0 bg-white p-6">
+            <div class="text-gray-700 my-4 p-2">
+              <p class="underline font-medium">Hideout won't be modified if:</p>
+              <ul>
+                <li>Selected mission doesn't take place in selected country</li>
+              </ul>
+            </div>
             <div class="grid grid-cols-6 gap-6">
               <div class="col-span-6 sm:col-span-3">
                 <label for="code" class="block text-sm font-medium text-gray-700">Code</label>
@@ -137,7 +143,6 @@ try {
       foreach (mysqli_query($pdo, "SELECT country FROM mission WHERE id = '$_POST[mission_id]'") as $m) {
         if (($c['name'] != $m['country'])) {
           header('Location: ../hideouts.php');
-          echo 'Hideout must be located in mission country';
         } else {
           mysqli_query($pdo, $reset);
           mysqli_query($pdo, $sql);

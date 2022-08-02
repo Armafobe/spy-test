@@ -47,7 +47,14 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
     <div class="md:grid md:grid-cols-1">
       <form action="#" method="POST">
         <div class="shadow overflow-hidden rounded sm:rounded-md">
-          <div class="px-4 bg-white p-6">
+          <div class="rounded pt-0 bg-white p-6">
+            <div class="text-gray-700 my-4 p-2">
+              <p class="underline font-medium">Mission won't be modified if:</p>
+              <ul>
+                <li>Selected contact is not native of selected country</li>
+                <li>One of the two selected agents doesn't have selected required skill</li>
+              </ul>
+            </div>
             <div class="grid grid-cols-6 gap-6">
               <div class="col-span-6 sm:col-span-3">
                 <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
