@@ -25,12 +25,12 @@
       <form action="./actions/verif.php" method="POST">
         <div class="shadow overflow-hidden rounded sm:rounded-md">
           <div class="px-4 bg-white p-6">
-            <div class="grid grid-cols-6 grid-rows-2 md:grid-rows-1 gap-4">
-              <div class="row-start-1 col-span-6 md:col-start-1 md:col-span-3">
+            <div class="grid grid-cols-6 auto-rows-max gap-4">
+              <div class="col-span-6 md:col-span-3">
                 <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                 <input type="email" name="email" id="email" required class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
               </div>
-              <div class="row-start-2 col-span-6 md:row-start-1 md:col-start-4 md:col-span-3">
+              <div class="col-span-6 md:col-span-3">
                 <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
                 <input type="password" name="password" id="password" required class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
               </div>
