@@ -44,71 +44,68 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
 
   <div class="relative text-center rounded-lg bg-slate-700 text-white w-3/4 mt-4 p-4 lg:w-2/5 mx-auto">
     <p class="mb-3 underline">Modify entity</p>
-    <div class="mt-10 sm:mt-0">
-      <div class="md:grid md:grid-cols-1">
-        <div class="mt-5 md:mt-0">
-          <form action="#" method="POST">
-            <div class="shadow overflow-hidden sm:rounded-md">
-              <div class="px-4 bg-white sm:p-6">
-                <div class="grid grid-cols-6 gap-6">
-                  <div class="col-span-6 sm:col-span-3">
-                    <label for="code" class="block text-sm font-medium text-gray-700">Code</label>
-                    <input type="text" required <?php
-                                                foreach (mysqli_query($pdo, "SELECT * FROM hideout WHERE id = '$_GET[modify]'") as $hideout) {
-                                                  echo 'value="' . $hideout['code'] . '" ';
-                                                }
-                                                ?> name="code" id="code" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                  </div>
 
-                  <div class="col-span-6 sm:col-span-3">
-                    <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
-                    <input type="text" required <?php
-                                                foreach (mysqli_query($pdo, "SELECT * FROM hideout WHERE id = '$_GET[modify]'") as $hideout) {
-                                                  echo 'value="' . $hideout['address'] . '" ';
-                                                }
-                                                ?> name="address" id="address" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                  </div>
+    <div class="md:grid md:grid-cols-1">
 
-                  <div class="col-span-6 sm:col-span-3">
-                    <label for="type" class="block text-sm font-medium text-gray-700">Type</label>
-                    <input type="text" required <?php
-                                                foreach (mysqli_query($pdo, "SELECT * FROM hideout WHERE id = '$_GET[modify]'") as $hideout) {
-                                                  echo 'value="' . $hideout['type'] . '" ';
-                                                }
-                                                ?> name="type" id="type" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                  </div>
+      <form action="#" method="POST">
+        <div class="shadow overflow-hidden rounded sm:rounded-md">
+          <div class="px-4 bg-white p-6">
+            <div class="grid grid-cols-6 gap-6">
+              <div class="col-span-6 sm:col-span-3">
+                <label for="code" class="block text-sm font-medium text-gray-700">Code</label>
+                <input type="text" required <?php
+                                            foreach (mysqli_query($pdo, "SELECT * FROM hideout WHERE id = '$_GET[modify]'") as $hideout) {
+                                              echo 'value="' . $hideout['code'] . '" ';
+                                            }
+                                            ?> name="code" id="code" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+              </div>
 
-                  <div class="col-span-6 sm:col-span-3">
-                    <label for="country_id" class="block text-sm font-medium text-gray-700">Country</label>
-                    <select required name="country_id" id="country_id" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                      <?php
-                      foreach (mysqli_query($pdo, ("SELECT * FROM country")) as $c) {
-                        echo '<option value="' . $c['id'] . '">' . $c['name'] . '</option>';
-                      }
-                      ?>
-                    </select>
-                  </div>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+                <input type="text" required <?php
+                                            foreach (mysqli_query($pdo, "SELECT * FROM hideout WHERE id = '$_GET[modify]'") as $hideout) {
+                                              echo 'value="' . $hideout['address'] . '" ';
+                                            }
+                                            ?> name="address" id="address" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+              </div>
 
-                  <div class="col-span-6 sm:col-span-3">
-                    <label for="mission_id" class="block text-sm font-medium text-gray-700">Mission</label>
-                    <select required name="mission_id" id="mission_id" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                      <?php
-                      foreach (mysqli_query($pdo, ("SELECT * FROM mission")) as $m) {
-                        echo '<option value="' . $m['id'] . '">' . $m['title'] . '</option>';
-                      }
-                      ?>
-                    </select>
-                  </div>
-                </div>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="type" class="block text-sm font-medium text-gray-700">Type</label>
+                <input type="text" required <?php
+                                            foreach (mysqli_query($pdo, "SELECT * FROM hideout WHERE id = '$_GET[modify]'") as $hideout) {
+                                              echo 'value="' . $hideout['type'] . '" ';
+                                            }
+                                            ?> name="type" id="type" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+              </div>
 
-                <button type="submit" class="inline-flex justify-center mt-5 py-2 px-6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="country_id" class="block text-sm font-medium text-gray-700">Country</label>
+                <select required name="country_id" id="country_id" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                  <?php
+                  foreach (mysqli_query($pdo, ("SELECT * FROM country")) as $c) {
+                    echo '<option value="' . $c['id'] . '">' . $c['name'] . '</option>';
+                  }
+                  ?>
+                </select>
+              </div>
+
+              <div class="col-span-6 sm:col-span-3">
+                <label for="mission_id" class="block text-sm font-medium text-gray-700">Mission</label>
+                <select required name="mission_id" id="mission_id" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                  <?php
+                  foreach (mysqli_query($pdo, ("SELECT * FROM mission")) as $m) {
+                    echo '<option value="' . $m['id'] . '">' . $m['title'] . '</option>';
+                  }
+                  ?>
+                </select>
               </div>
             </div>
-          </form>
+
+            <button type="submit" class="inline-flex justify-center mt-5 py-2 px-6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
+          </div>
         </div>
-      </div>
+      </form>
     </div>
-  </div>
   </div>
 
 </body>

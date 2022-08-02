@@ -49,65 +49,63 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
                                                                                                         }
                                                                                                         ?>>
     <p class="mb-3 underline">Add entity</p>
-    <div class="mt-10 sm:mt-0">
-      <div class="md:grid md:grid-cols-1">
-        <div class="mt-5 md:mt-0">
-          <form action="./actions/agentAdd.php" method="POST">
-            <div class="shadow overflow-hidden sm:rounded-md">
-              <div class="px-4 py-5 bg-white sm:p-6">
-                <div class="grid grid-cols-3 md:grid-cols-6 gap-6">
-                  <div class="md:col-span-3 col-span-6">
-                    <label for="last_name" class="block text-sm font-medium text-gray-700">Last name</label>
-                    <input type="text" required name="last_name" id="last_name" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                  </div>
 
-                  <div class="md:col-span-3 col-span-6">
-                    <label for="first_name" class="block text-sm font-medium text-gray-700">First name</label>
-                    <input type="text" required name="first_name" id="first_name" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                  </div>
+    <div class="md:grid md:grid-cols-1">
 
-                  <div class="md:col-span-3 col-span-6">
-                    <label for="birth_date" class="block text-sm font-medium text-gray-700">Birth Date</label>
-                    <input type="date" required name="birth_date" id="birth_date" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                  </div>
+      <form action="./actions/agentAdd.php" method="POST">
+        <div class="shadow overflow-hidden rounded sm:rounded-md">
+          <div class="px-4 py-5 bg-white p-6">
+            <div class="grid grid-cols-3 md:grid-cols-6 gap-6">
+              <div class="md:col-span-3 col-span-6">
+                <label for="last_name" class="block text-sm font-medium text-gray-700">Last name</label>
+                <input type="text" required name="last_name" id="last_name" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+              </div>
 
-                  <div class="md:col-span-3 col-span-6">
-                    <label for="code_id" class="block text-sm font-medium text-gray-700">Code ID</label>
-                    <input type="text" required name="code_id" id="code_id" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                  </div>
+              <div class="md:col-span-3 col-span-6">
+                <label for="first_name" class="block text-sm font-medium text-gray-700">First name</label>
+                <input type="text" required name="first_name" id="first_name" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+              </div>
 
-                  <div class="md:col-span-3 col-span-6 md:col-start-1">
-                    <label for="nationality" class="block text-sm font-medium text-gray-700">Nationality</label>
-                    <select required name="nationality" id="nationality" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                      <?php
-                      foreach (mysqli_query($pdo, ("SELECT * FROM nationality")) as $n) {
-                        echo '<option value="' . $n['id'] . '">' . $n['country'] . '</option>';
-                      }
-                      ?>
-                    </select>
-                  </div>
+              <div class="md:col-span-3 col-span-6">
+                <label for="birth_date" class="block text-sm font-medium text-gray-700">Birth Date</label>
+                <input type="date" required name="birth_date" id="birth_date" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+              </div>
 
-                  <div class="md:col-span-3 col-span-6 md:col-start-4">
-                    <label for="skill" class="block text-sm font-medium text-gray-700">Skill</label>
-                    <select required name="skill" id="skill" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                      <?php
-                      foreach (mysqli_query($pdo, ("SELECT * FROM skill")) as $s) {
-                        echo '<option value="' . $s['id'] . '">' . $s['name'] . '</option>';
-                      }
-                      ?>
-                    </select>
-                  </div>
-                </div>
+              <div class="md:col-span-3 col-span-6">
+                <label for="code_id" class="block text-sm font-medium text-gray-700">Code ID</label>
+                <input type="text" required name="code_id" id="code_id" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+              </div>
 
-                <button type="submit" class="inline-flex justify-center mt-5 py-2 px-6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
+              <div class="md:col-span-3 col-span-6 md:col-start-1">
+                <label for="nationality" class="block text-sm font-medium text-gray-700">Nationality</label>
+                <select required name="nationality" id="nationality" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                  <?php
+                  foreach (mysqli_query($pdo, ("SELECT * FROM nationality")) as $n) {
+                    echo '<option value="' . $n['id'] . '">' . $n['country'] . '</option>';
+                  }
+                  ?>
+                </select>
+              </div>
+
+              <div class="md:col-span-3 col-span-6 md:col-start-4">
+                <label for="skill" class="block text-sm font-medium text-gray-700">Skill</label>
+                <select required name="skill" id="skill" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                  <?php
+                  foreach (mysqli_query($pdo, ("SELECT * FROM skill")) as $s) {
+                    echo '<option value="' . $s['id'] . '">' . $s['name'] . '</option>';
+                  }
+                  ?>
+                </select>
               </div>
             </div>
-          </form>
+
+            <button type="submit" class="inline-flex justify-center mt-5 py-2 px-6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
+          </div>
         </div>
-      </div>
+      </form>
     </div>
   </div>
-  </div>
+
   <div class="block text-center py-8">
     <?php
     foreach (mysqli_query($pdo, ('SELECT * FROM agent')) as $agent) {

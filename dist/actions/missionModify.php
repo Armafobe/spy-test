@@ -44,147 +44,143 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
 
   <div class="relative text-center rounded-lg bg-slate-700 text-white w-3/4 mt-4 p-4 lg:w-2/5 mx-auto">
     <p class="mb-3 underline">Modify entity</p>
-    <div class="mt-10 sm:mt-0">
-      <div class="md:grid md:grid-cols-1">
-        <div class="mt-5 md:mt-0">
-          <form action="#" method="POST">
-            <div class="shadow overflow-hidden sm:rounded-md">
-              <div class="px-4 bg-white sm:p-6">
-                <div class="grid grid-cols-6 gap-6">
-                  <div class="col-span-6 sm:col-span-3">
-                    <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
-                    <input type="text" required <?php
-                                                foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE id = '$_GET[modify]'") as $mission) {
-                                                  echo 'value="' . $mission['title'] . '" ';
-                                                }
-                                                ?> name="title" id="title" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                  </div>
+    <div class="md:grid md:grid-cols-1">
+      <form action="#" method="POST">
+        <div class="shadow overflow-hidden rounded sm:rounded-md">
+          <div class="px-4 bg-white p-6">
+            <div class="grid grid-cols-6 gap-6">
+              <div class="col-span-6 sm:col-span-3">
+                <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
+                <input type="text" required <?php
+                                            foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE id = '$_GET[modify]'") as $mission) {
+                                              echo 'value="' . $mission['title'] . '" ';
+                                            }
+                                            ?> name="title" id="title" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+              </div>
 
-                  <div class="col-span-6 sm:col-span-3">
-                    <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
-                    <textarea required <?php
-                                        foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE id = '$_GET[modify]'") as $mission) {
-                                          echo 'value="' . $mission['description'] . '" ';
-                                        }
-                                        ?> name="description" id="description" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"></textarea>
-                  </div>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                <textarea required <?php
+                                    foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE id = '$_GET[modify]'") as $mission) {
+                                      echo 'value="' . $mission['description'] . '" ';
+                                    }
+                                    ?> name="description" id="description" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"></textarea>
+              </div>
 
-                  <div class="col-span-6 sm:col-span-3">
-                    <label for="code_name" class="block text-sm font-medium text-gray-700">Code Name</label>
-                    <input type="text" required <?php
-                                                foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE id = '$_GET[modify]'") as $mission) {
-                                                  echo 'value="' . $mission['code_name'] . '" ';
-                                                }
-                                                ?> name="code_name" id="code_name" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                  </div>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="code_name" class="block text-sm font-medium text-gray-700">Code Name</label>
+                <input type="text" required <?php
+                                            foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE id = '$_GET[modify]'") as $mission) {
+                                              echo 'value="' . $mission['code_name'] . '" ';
+                                            }
+                                            ?> name="code_name" id="code_name" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+              </div>
 
-                  <div class="col-span-6 sm:col-span-3">
-                    <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
-                    <select required required <?php
-                                              foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE id = '$_GET[modify]'") as $mission) {
-                                                echo 'value="' . $mission['country'] . '" ';
-                                              }
-                                              ?> name="country" id="country" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                      <?php
-                      foreach (mysqli_query($pdo, "SELECT * FROM country") as $c) {
-                        echo '<option value="' . $c['name'] . '">' . $c['name'] . '</option>';
-                      }
-                      ?>
-                    </select>
-                  </div>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
+                <select required required <?php
+                                          foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE id = '$_GET[modify]'") as $mission) {
+                                            echo 'value="' . $mission['country'] . '" ';
+                                          }
+                                          ?> name="country" id="country" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                  <?php
+                  foreach (mysqli_query($pdo, "SELECT * FROM country") as $c) {
+                    echo '<option value="' . $c['name'] . '">' . $c['name'] . '</option>';
+                  }
+                  ?>
+                </select>
+              </div>
 
-                  <div class="col-span-6 sm:col-span-3">
-                    <label for="start_date" class="block text-sm font-medium text-gray-700">Start Date</label>
-                    <input type="datetime-local" required <?php
-                                                          foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE id = '$_GET[modify]'") as $mission) {
-                                                            echo 'value="' . $mission['start_date'] . '" ';
-                                                          }
-                                                          ?> name="start_date" id="start_date" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                  </div>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="start_date" class="block text-sm font-medium text-gray-700">Start Date</label>
+                <input type="datetime-local" required <?php
+                                                      foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE id = '$_GET[modify]'") as $mission) {
+                                                        echo 'value="' . $mission['start_date'] . '" ';
+                                                      }
+                                                      ?> name="start_date" id="start_date" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+              </div>
 
-                  <div class="col-span-6 sm:col-span-3">
-                    <label for="end_date" class="block text-sm font-medium text-gray-700">End Date</label>
-                    <input type="datetime-local" required <?php
-                                                          foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE id = '$_GET[modify]'") as $mission) {
-                                                            echo 'value="' . $mission['end_date'] . '" ';
-                                                          }
-                                                          ?> name="end_date" id="end_date" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                  </div>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="end_date" class="block text-sm font-medium text-gray-700">End Date</label>
+                <input type="datetime-local" required <?php
+                                                      foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE id = '$_GET[modify]'") as $mission) {
+                                                        echo 'value="' . $mission['end_date'] . '" ';
+                                                      }
+                                                      ?> name="end_date" id="end_date" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+              </div>
 
-                  <div class="col-span-6 sm:col-span-3">
-                    <label for="skill" class=" block text-sm font-medium text-gray-700">Required Skill</label>
-                    <select required name="skill" id="skill" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                      <?php
-                      foreach (mysqli_query($pdo, "SELECT * FROM skill") as $s) {
-                        echo '<option value="' . $s['id'] . '">' . $s['name'] . '</option>';
-                      }
-                      ?>
-                    </select>
-                  </div>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="skill" class=" block text-sm font-medium text-gray-700">Required Skill</label>
+                <select required name="skill" id="skill" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                  <?php
+                  foreach (mysqli_query($pdo, "SELECT * FROM skill") as $s) {
+                    echo '<option value="' . $s['id'] . '">' . $s['name'] . '</option>';
+                  }
+                  ?>
+                </select>
+              </div>
 
-                  <div class="col-span-6 sm:col-span-3">
-                    <label for="mission_type_id" class=" block text-sm font-medium text-gray-700">Mission Type</label>
-                    <select required name="mission_type_id" id="mission_type_id" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                      <?php
-                      foreach (mysqli_query($pdo, "SELECT * FROM mission_type") as $mt) {
-                        echo '<option value="' . $mt['id'] . '">' . $mt['type'] . '</option>';
-                      }
-                      ?>
-                    </select>
-                  </div>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="mission_type_id" class=" block text-sm font-medium text-gray-700">Mission Type</label>
+                <select required name="mission_type_id" id="mission_type_id" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                  <?php
+                  foreach (mysqli_query($pdo, "SELECT * FROM mission_type") as $mt) {
+                    echo '<option value="' . $mt['id'] . '">' . $mt['type'] . '</option>';
+                  }
+                  ?>
+                </select>
+              </div>
 
-                  <div class="col-span-6 sm:col-span-3">
-                    <label for="mission_status_id" class=" block text-sm font-medium text-gray-700">Mission Status</label>
-                    <select required name="mission_status_id" id="mission_status_id" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                      <?php
-                      foreach (mysqli_query($pdo, "SELECT * FROM mission_status") as $ms) {
-                        echo '<option value="' . $ms['id'] . '">' . $ms['status'] . '</option>';
-                      }
-                      ?>
-                    </select>
-                  </div>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="mission_status_id" class=" block text-sm font-medium text-gray-700">Mission Status</label>
+                <select required name="mission_status_id" id="mission_status_id" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                  <?php
+                  foreach (mysqli_query($pdo, "SELECT * FROM mission_status") as $ms) {
+                    echo '<option value="' . $ms['id'] . '">' . $ms['status'] . '</option>';
+                  }
+                  ?>
+                </select>
+              </div>
 
-                  <div class="col-span-6 sm:col-span-3">
-                    <label for="contact_id" class=" block text-sm font-medium text-gray-700">Contact</label>
-                    <select required name="contact_id" id="contact_id" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                      <?php
-                      foreach (mysqli_query($pdo, "SELECT * FROM contact") as $c) {
-                        echo '<option value="' . $c['id'] . '">' . $c['last_name'] . ' ' . $c['first_name'] . '</option>';
-                      }
-                      ?>
-                    </select>
-                  </div>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="contact_id" class=" block text-sm font-medium text-gray-700">Contact</label>
+                <select required name="contact_id" id="contact_id" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                  <?php
+                  foreach (mysqli_query($pdo, "SELECT * FROM contact") as $c) {
+                    echo '<option value="' . $c['id'] . '">' . $c['last_name'] . ' ' . $c['first_name'] . '</option>';
+                  }
+                  ?>
+                </select>
+              </div>
 
-                  <div class="col-span-6 sm:col-span-3">
-                    <label for="agent_id" class=" block text-sm font-medium text-gray-700">Assigned Agent</label>
-                    <select required name="agent_id" id="agent_id" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                      <?php
-                      foreach (mysqli_query($pdo, "SELECT * FROM agent") as $a) {
-                        echo '<option value="' . $a['id'] . '">' . $a['last_name'] . ' ' . $a['first_name'] . '</option>';
-                      }
-                      ?>
-                    </select>
-                  </div>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="agent_id" class=" block text-sm font-medium text-gray-700">Assigned Agent</label>
+                <select required name="agent_id" id="agent_id" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                  <?php
+                  foreach (mysqli_query($pdo, "SELECT * FROM agent") as $a) {
+                    echo '<option value="' . $a['id'] . '">' . $a['last_name'] . ' ' . $a['first_name'] . '</option>';
+                  }
+                  ?>
+                </select>
+              </div>
 
-                  <div class="col-span-6 sm:col-span-3">
-                    <label for="agent_id_2" class=" block text-sm font-medium text-gray-700">(Optional) 2nd Agent</label>
-                    <select required name="agent_id_2" id="agent_id_2" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                      <option value="">None</option>
-                      <?php
-                      foreach (mysqli_query($pdo, "SELECT * FROM agent") as $a) {
-                        echo '<option value="' . $a['id'] . '">' . $a['last_name'] . ' ' . $a['first_name'] . '</option>';
-                      }
-                      ?>
-                    </select>
-                  </div>
-                </div>
-
-                <button type="submit" class="inline-flex justify-center mt-5 py-2 px-6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
+              <div class="col-span-6 sm:col-span-3">
+                <label for="agent_id_2" class=" block text-sm font-medium text-gray-700">(Optional) 2nd Agent</label>
+                <select required name="agent_id_2" id="agent_id_2" class="mt-1 text-gray-700 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                  <option value="">None</option>
+                  <?php
+                  foreach (mysqli_query($pdo, "SELECT * FROM agent") as $a) {
+                    echo '<option value="' . $a['id'] . '">' . $a['last_name'] . ' ' . $a['first_name'] . '</option>';
+                  }
+                  ?>
+                </select>
               </div>
             </div>
-          </form>
+
+            <button type="submit" class="inline-flex justify-center mt-5 py-2 px-6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
+          </div>
         </div>
-      </div>
+      </form>
     </div>
   </div>
   </div>
@@ -226,7 +222,6 @@ try {
       foreach (mysqli_query($pdo, "SELECT * FROM contact WHERE id = '$_POST[contact_id]'") as $contact) {
         if ($country['id'] != $contact['nationality_id']) {
           header('Location: ../missions.php');
-          echo '<p>Selected country must have contact with same nationality</p>';
         } else {
           foreach (mysqli_query($pdo, "SELECT * FROM agent_skill WHERE agent_id = '$_POST[agent_id]' OR agent_id = '$_POST[agent_id_2]'") as $agent) {
             if ($agent['skill_id'] != $_POST['skill']) {
