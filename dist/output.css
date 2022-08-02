@@ -1406,6 +1406,10 @@ a:hover:after {
   .md\:gap-2{
     gap: 0.5rem;
   }
+
+  .md\:justify-self-auto{
+    justify-self: auto;
+  }
 }
 
 @media (min-width: 1024px){
