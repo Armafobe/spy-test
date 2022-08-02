@@ -44,9 +44,7 @@ $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cl
 
   <div class="relative text-center rounded-lg bg-slate-700 text-white w-3/4 mt-4 p-4 lg:w-2/5 mx-auto">
     <p class="mb-3 underline">Modify entity</p>
-
     <div class="md:grid md:grid-cols-1">
-
       <form action="#" method="POST">
         <div class="shadow overflow-hidden rounded sm:rounded-md">
           <div class="px-4 py-5 bg-white p-6">
