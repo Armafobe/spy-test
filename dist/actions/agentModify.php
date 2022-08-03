@@ -140,10 +140,12 @@ try {
     nationality_id = '$_POST[nationality]' 
     WHERE id = '$_GET[modify]'";
     foreach (mysqli_query($pdo, ("SELECT * from agent WHERE id = '$_GET[modify]'")) as $agent) {
-      if (mysqli_query($pdo, "IF NOT EXISTS (SELECT count(*) FROM agent_skill WHERE agent_id = '$agent[id]')")) {
-        $sql2 = "INSERT INTO agent_skill (agent_id, skill_id) VALUES ('$agent[id]', '$_POST[skill]')";
-      } else {
-        $sql2 = "UPDATE agent_skill SET skill_id = '$_POST[skill]' WHERE agent_id = '$agent[id]'";
+      foreach (mysqli_query($pdo, "SELECT count(*) as count FROM agent_skill WHERE agent_id = '$agent[id]'") as $count) {
+        if ($count['count'] == 0) {
+          $sql2 = "INSERT INTO agent_skill (agent_id, skill_id) VALUES ('$agent[id]', '$_POST[skill]')";
+        } else {
+          $sql2 = "UPDATE agent_skill SET skill_id = '$_POST[skill]' WHERE agent_id = '$agent[id]'";
+        }
       }
     }
     mysqli_query($pdo, $sql);
