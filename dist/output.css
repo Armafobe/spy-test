@@ -762,10 +762,6 @@ select{
   grid-column-start: 2;
 }
 
-.col-start-4{
-  grid-column-start: 4;
-}
-
 .row-start-1{
   grid-row-start: 1;
 }
@@ -787,6 +783,11 @@ select{
   margin-right: auto;
 }
 
+.my-4{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
 .my-6{
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
@@ -795,11 +796,6 @@ select{
 .mx-4{
   margin-left: 1rem;
   margin-right: 1rem;
-}
-
-.my-4{
-  margin-top: 1rem;
-  margin-bottom: 1rem;
 }
 
 .mt-8{
@@ -814,16 +810,12 @@ select{
   margin-bottom: 0.75rem;
 }
 
-.mt-10{
-  margin-top: 2.5rem;
+.mt-1{
+  margin-top: 0.25rem;
 }
 
 .mt-5{
   margin-top: 1.25rem;
-}
-
-.mt-1{
-  margin-top: 0.25rem;
 }
 
 .mt-2{
@@ -895,10 +887,6 @@ select{
   grid-template-rows: repeat(2, minmax(0, 1fr));
 }
 
-.grid-rows-1{
-  grid-template-rows: repeat(1, minmax(0, 1fr));
-}
-
 .flex-wrap{
   flex-wrap: wrap;
 }
@@ -947,12 +935,12 @@ select{
   border-radius: 0.5rem;
 }
 
-.rounded-md{
-  border-radius: 0.375rem;
-}
-
 .rounded{
   border-radius: 0.25rem;
+}
+
+.rounded-md{
+  border-radius: 0.375rem;
 }
 
 .border{
@@ -1067,12 +1055,12 @@ select{
   padding-bottom: 2rem;
 }
 
-.pl-10{
-  padding-left: 2.5rem;
-}
-
 .pt-0{
   padding-top: 0px;
+}
+
+.pl-10{
+  padding-left: 2.5rem;
 }
 
 .text-center{
@@ -1111,11 +1099,6 @@ select{
 .text-gray-900{
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
-}
-
-.text-black{
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
 .underline{
@@ -1318,10 +1301,6 @@ a:hover:after {
     grid-row-start: 1;
   }
 
-  .sm\:mt-0{
-    margin-top: 0px;
-  }
-
   .sm\:w-2\/3{
     width: 66.666667%;
   }
@@ -1336,10 +1315,6 @@ a:hover:after {
 
   .sm\:rounded-md{
     border-radius: 0.375rem;
-  }
-
-  .sm\:p-6{
-    padding: 1.5rem;
   }
 
   .sm\:text-sm{
@@ -1369,20 +1344,8 @@ a:hover:after {
     grid-column-start: 5;
   }
 
-  .md\:col-start-3{
-    grid-column-start: 3;
-  }
-
   .md\:col-start-2{
     grid-column-start: 2;
-  }
-
-  .md\:row-start-1{
-    grid-row-start: 1;
-  }
-
-  .md\:mt-0{
-    margin-top: 0px;
   }
 
   .md\:grid{
@@ -1417,20 +1380,12 @@ a:hover:after {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .md\:grid-rows-1{
-    grid-template-rows: repeat(1, minmax(0, 1fr));
-  }
-
   .md\:justify-items-stretch{
     justify-items: stretch;
   }
 
   .md\:gap-2{
     gap: 0.5rem;
-  }
-
-  .md\:justify-self-auto{
-    justify-self: auto;
   }
 }
 
