@@ -139,7 +139,7 @@ try {
     code_id = '$_POST[code_id]', 
     nationality_id = '$_POST[nationality]' 
     WHERE id = '$_GET[modify]'";
-    foreach (mysqli_query($pdo, ("SELECT * from agent WHERE last_name = '$_POST[last_name]'")) as $agent) {
+    foreach (mysqli_query($pdo, ("SELECT * from agent WHERE id = '$_GET[modify]'")) as $agent) {
       if (is_null(mysqli_query($pdo, "SELECT skill_id FROM agent_skill WHERE agent_id = $agent[id]"))) {
         $sql2 = "INSERT INTO agent_skill (agent_id, skill_id) VALUES ($agent[id], $_POST[skill])";
       } else {
