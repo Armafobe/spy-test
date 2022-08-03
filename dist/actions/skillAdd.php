@@ -9,9 +9,7 @@ $query_builder = TRUE;
 
 try {
   $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
-  $reset = "ALTER TABLE skill auto_increment = 0;";
   $sql = "INSERT INTO skill (name) VALUES ('$_POST[name]')";
-  mysqli_query($pdo, $reset);
   mysqli_query($pdo, $sql);
   header('Location: ../skills.php');
 } catch (PDOException $e) {

@@ -10,7 +10,6 @@ $query_builder = TRUE;
 
 try {
   $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
-  $reset = "ALTER TABLE target auto_increment = 0;";
   $sql = "INSERT INTO target (last_name, first_name, birth_date, code_name, nationality_id, mission_id) VALUES 
   ('$_POST[last_name]', 
   '$_POST[first_name]', 
@@ -24,7 +23,6 @@ try {
       if ($_POST['nationality'] == $agent['nationality_id']) {
         header('Location: ../targets.php');
       } else {
-        mysqli_query($pdo, $reset);
         mysqli_query($pdo, $sql);
         header('Location: ../targets.php');
       }

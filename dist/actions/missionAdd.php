@@ -9,7 +9,6 @@ $query_builder = TRUE;
 
 try {
   $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
-  $reset = "ALTER TABLE mission auto_increment = 0;";
   $sql = "INSERT INTO mission (title, description, code_name, country, start_date, end_date, skill_id, mission_type_id, mission_status_id) VALUES 
   ('$_POST[title]', 
   '$_POST[description]', 
@@ -33,7 +32,6 @@ try {
             header('Location: ../index.php');
             echo '<p>One of the two agents must have required skill</p>';
           } else {
-            mysqli_query($pdo, $reset);
             if ($_POST['agent_id_2'] == $_POST['agent_id']) {
               header('Location: ../index.php');
               echo '<p></p>';
