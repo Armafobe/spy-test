@@ -7,8 +7,9 @@ $cleardb_db = substr($cleardb_url["path"], 1);
 $active_group = 'default';
 $query_builder = TRUE;
 try {
+  $counter = 0;
   $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
-  $reset = "ALTER TABLE agent SET auto_increment = reset;";
+  $reset = "ALTER TABLE agent SET auto_increment = $counter := $counter + 1;";
   mysqli_query($pdo, $reset);
   $sql = "INSERT INTO agent (last_name, first_name, birth_date, code_id, nationality_id) VALUES 
   ('$_POST[last_name]', 
