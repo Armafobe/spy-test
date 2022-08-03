@@ -238,11 +238,10 @@ try {
               mysqli_query($pdo, $reset);
               if ($_POST['agent_id_2'] == $_POST['agent_id']) {
                 header('Location: ../missions.php');
-                echo '<p></p>';
               } else if (!$_POST['agent_id_2']) {
                 mysqli_query($pdo, $sql);
                 foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE title = '$_POST[title]'") as $m) {
-                  mysqli_query($pdo, "UPDATE mission_agent SET mission_id = '$m[id]', agent_id = '$_POST[agent_id]'");
+                  mysqli_query($pdo, "UPDATE mission_agent SET agent_id = '$_POST[agent_id]' WHERE mission_id = '$m[id]'");
                 }
               } else {
                 mysqli_query($pdo, $sql);
