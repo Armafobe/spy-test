@@ -8,7 +8,7 @@ $active_group = 'default';
 $query_builder = TRUE;
 try {
   $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
-  $count = "SELECT count(id) FROM agent";
+  $count = mysqli_query($pdo, "SELECT count(id) FROM agent");
   print_r($count);
   $reset = "ALTER TABLE agent AUTO_INCREMENT = " . ($count + 1) . "";
   mysqli_query($pdo, $reset);
