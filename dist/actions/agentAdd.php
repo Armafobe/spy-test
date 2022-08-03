@@ -9,7 +9,8 @@ $query_builder = TRUE;
 try {
   $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
   $count = "SELECT count(id) FROM agent";
-  $reset = "ALTER TABLE agent AUTO_INCREMENT = ($count + 1)";
+  print_r($count);
+  $reset = "ALTER TABLE agent AUTO_INCREMENT = " . ($count + 1) . "";
   mysqli_query($pdo, $reset);
   $sql = "INSERT INTO agent (last_name, first_name, birth_date, code_id, nationality_id) VALUES 
   ('$_POST[last_name]', 
