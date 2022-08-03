@@ -8,9 +8,7 @@ $active_group = 'default';
 $query_builder = TRUE;
 try {
   $pdo = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
-  $count = "SELECT count(id) as count FROM agent";
-  print_r(mysqli_query($pdo, $count));
-  $reset = "ALTER TABLE agent AUTO_INCREMENT = " . (mysqli_query($pdo, $count) + 1) . "";
+  $reset = "ALTER TABLE agent AUTO_INCREMENT = " . mysqli_query($pdo, "SELECT count(id) FROM agent") + 1 . "";
   mysqli_query($pdo, $reset);
   $sql = "INSERT INTO agent (last_name, first_name, birth_date, code_id, nationality_id) VALUES 
   ('$_POST[last_name]', 
@@ -19,7 +17,7 @@ try {
   '$_POST[code_id]', 
   '$_POST[nationality]')";
   mysqli_query($pdo, $sql);
-  foreach ($pdo->query("SELECT * from agent WHERE last_name = '$_POST[last_name]'") as $agent) {
+  foreach (mysqli_query($pdo, "SELECT * from agent WHERE last_name = '$_POST[last_name]'") as $agent) {
     $sql2 = "INSERT INTO agent_skill (agent_id, skill_id) VALUES ('$agent[id]', '$_POST[skill]')";
   }
   mysqli_query($pdo, $sql2);
