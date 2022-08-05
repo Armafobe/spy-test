@@ -213,7 +213,6 @@ try {
         WHERE id = '$_GET[modify]'";
     }
   } else {
-    $reset = "ALTER TABLE mission auto_increment = 0;";
     $sql = "UPDATE mission SET 
   title = '$_POST[title]', 
   description = '$_POST[description]', 
@@ -233,9 +232,7 @@ try {
           foreach (mysqli_query($pdo, "SELECT * FROM agent_skill WHERE agent_id = '$_POST[agent_id]' OR agent_id = '$_POST[agent_id_2]'") as $agent) {
             if ($agent['skill_id'] != $_POST['skill']) {
               header('Location: ../missions.php');
-              echo '<p>One of the two agents must have required skill</p>';
             } else {
-              mysqli_query($pdo, $reset);
               if ($_POST['agent_id_2'] == $_POST['agent_id']) {
                 header('Location: ../missions.php');
               } else if (!$_POST['agent_id_2']) {
