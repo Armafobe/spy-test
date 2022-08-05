@@ -144,7 +144,6 @@ try {
         if (($c['name'] != $m['country'])) {
           header('Location: ../hideouts.php');
         } else {
-          mysqli_query($pdo, $reset);
           mysqli_query($pdo, $sql);
           header('Location: ../hideouts.php');
         }

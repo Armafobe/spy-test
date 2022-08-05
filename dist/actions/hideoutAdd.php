@@ -13,7 +13,6 @@ try {
     foreach (mysqli_query($pdo, "SELECT country FROM mission WHERE id = '$_POST[mission_id]'") as $m) {
       if (($c['name'] != $m['country'])) {
         header('Location: ../hideouts.php');
-        echo 'Hideout must be located in mission country';
       } else {
         mysqli_query($pdo, $sql);
         header('Location: ../hideouts.php');

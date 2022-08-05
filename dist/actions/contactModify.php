@@ -121,7 +121,13 @@ try {
       WHERE id = '$_GET[modify]'";
     }
   } else {
-    $sql = "UPDATE contact SET last_name = '$_POST[last_name]', first_name = '$_POST[first_name]', birth_date = '$_POST[birth_date]', code_name = '$_POST[code_name]', nationality_id = '$_POST[nationality]' WHERE id = '$_GET[modify]'";
+    $sql = "UPDATE contact SET 
+    last_name = '$_POST[last_name]', 
+    first_name = '$_POST[first_name]', 
+    birth_date = '$_POST[birth_date]', 
+    code_name = '$_POST[code_name]', 
+    nationality_id = '$_POST[nationality]' 
+    WHERE id = '$_GET[modify]'";
     mysqli_query($pdo, $sql);
   }
 } catch (PDOException $e) {
