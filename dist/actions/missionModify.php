@@ -245,13 +245,11 @@ try {
                 foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE title = '$_POST[title]'") as $m) {
                   mysqli_query($pdo, "DELETE FROM mission_agent WHERE mission_id = '$m[id]'");
                   mysqli_query($pdo, "INSERT INTO mission_agent (mission_id, agent_id) VALUES ('$m[id]', '$_POST[agent_id]'), ('$m[id]', '$_POST[agent_id_2]')");;
+                  mysqli_query($pdo, "UPDATE mission_contact SET contact_id = '$_POST[contact_id]' WHERE mission_id = '$m[id]'");
+                  header('Location: ../missions.php');
                 }
               }
-            };
-            foreach (mysqli_query($pdo, "SELECT * FROM mission WHERE title = '$_POST[title]'") as $m) {
-              mysqli_query($pdo, "UPDATE mission_contact SET contact_id = '$_POST[contact_id]' WHERE mission_id = '$m[id]'");
             }
-            header('Location: ../missions.php');
           }
         }
       }
